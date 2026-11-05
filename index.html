@@ -309,7 +309,11 @@ h1{font-family:Georgia,"Times New Roman",serif;letter-spacing:.01em}
 .langsw,.pdfbtns{display:inline-flex;gap:8px;flex-wrap:wrap}
 .h4{font-size:17px;color:var(--maroon);margin:14px 0 8px;font-weight:700}
 .balaadv{margin-top:12px}
-.balasum .poritem{grid-column:1/-1}
+.balagrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px;margin:8px 0 4px}
+.balatile{background:var(--cell);border:1px solid var(--line);border-left:5px solid var(--line);border-radius:12px;padding:10px 12px;display:flex;flex-direction:column;gap:6px;align-items:flex-start;min-width:0}
+.balatile.g{border-left-color:var(--good)}.balatile.m{border-left-color:var(--turmeric)}.balatile.b{border-left-color:var(--bad)}
+.balatile .bt-who{font-size:18px;font-weight:800;color:var(--maroon)}
+.balatile .bt-s{font-size:15px;color:var(--muted);line-height:1.4}
 .balaadv p{margin:6px 0 0;font-size:17px;line-height:1.55}
 .langsw .btn.on{background:var(--maroon);border-color:var(--maroon);color:#fff}
 #printArea{display:none}
@@ -339,7 +343,10 @@ h1{font-family:Georgia,"Times New Roman",serif;letter-spacing:.01em}
   #printArea .h3{font-size:15pt;margin:14px 0 8px;break-after:avoid}
   #printArea .h4{font-size:13pt;margin:10px 0 6px;break-after:avoid}
   #printArea .balaadv{break-inside:avoid}
-  #printArea .balasum{grid-template-columns:1fr}
+  #printArea .balagrid{grid-template-columns:repeat(3,1fr);gap:6px;break-inside:avoid}
+  #printArea .balatile{padding:6px 8px}
+  #printArea .balatile .bt-who{font-size:13pt}
+  #printArea .balatile .bt-s{font-size:10.5pt}
   #printArea .charts{grid-template-columns:1fr 1fr;gap:12px;break-inside:avoid}
   #printArea .chart .c .pl{font-size:12pt}
   #printArea .chart .c .sn{font-size:9pt}
@@ -2050,99 +2057,160 @@ function printHoroscope(f){
   setTimeout(()=>window.print(),50);
 }
 
-/* ===== பாலாரிஷ்டம் · Balarishta: classical early-childhood danger indications and their cancellations =====
-   Sources: Brihat Parashara Hora Shastra ch. 9 (Arishta); Sarvartha Chintamani (Arishta-bhanga).
-   Whole-sign houses; graha drishti: all 7th, Mars 4/8, Jupiter 5/9, Saturn 3/10, Rahu/Ketu 7th. */
+/* ===== பாலாரிஷ்டம் · Balarishta, grouped by WHOM each indication concerns =====
+   Child, mother, father, siblings, family/wealth.
+   Sources: BPHS ch. 9 (Arishta, incl. matru/pitru arishta), Sarvartha Chintamani (arishta-bhanga),
+   Muhurta Chintamani tradition for the pada-wise Ganda-moola results (texts differ; variants noted).
+   Whole-sign houses; drishti: all 7th, Mars 4/8, Jupiter 5/9, Saturn 3/10, Rahu/Ketu 7th. */
 const BALA_MAL=['Sun','Mars','Saturn','Rahu','Ketu'];
-const BALA_BEN_SIGNS=[1,2,3,5,6,8,11];               // signs of Venus, Mercury, Moon, Jupiter
+const BALA_BEN_SIGNS=[1,2,3,5,6,8,11];
 const BALA_ASP={Mars:[4,7,8],Jupiter:[5,7,9],Saturn:[3,7,10]};
+const BALA_ENEMY={Sun:['Saturn','Venus'],Mars:['Mercury'],Saturn:['Sun','Moon','Mars'],Rahu:['Sun','Moon'],Ketu:['Sun','Moon']};
+const BALA_WHO={child:['குழந்தை','Child'],mother:['தாய்','Mother'],father:['தந்தை','Father'],sib:['உடன்பிறப்புகள்','Siblings'],family:['குடும்பம் · செல்வம்','Family and wealth']};
+/* Ganda-moola pada results: [who | 'shubha' | 'general', variant note TA, variant note EN] */
+const GANDA_PADA={
+  18:{1:['father'],2:['mother'],3:['family'],4:['shubha']},                                   // Moolam
+  8: {1:['shubha'],2:['family'],3:['mother'],4:['father']},                                   // Ayilyam (reverse of Moolam)
+  17:{1:['sib','மூத்த உடன்பிறப்பு','elder sibling'],2:['sib','இளைய உடன்பிறப்பு','younger sibling'],3:['mother'],4:['child','சில நூல்கள் தந்தை என்று கூறும்','some texts say the father']}, // Kettai
+  0: {1:['father','மரபுகள் வேறுபடும்','traditions differ'],2:['general'],3:['general'],4:['general']},   // Aswini
+  9: {1:['father','சில நூல்கள் தாய் என்று கூறும்','some texts say the mother'],2:['general'],3:['general'],4:['general']}, // Magam
+  26:{1:['general'],2:['general'],3:['general'],4:['child','சில நூல்கள் இளைய உடன்பிறப்பு என்று கூறும்','some texts say younger siblings']} // Revathi
+};
+const whoL=k=>Lx(BALA_WHO[k][0],BALA_WHO[k][1]);
+
 function renderBala(ctx){
   const box=$('balaOut'); if(!box) return;
   const {P,asc,birth,st,pl}=ctx, tz=pl.tz, F=chartFacts(P,asc), S=F.sign, H=F.house;
-  const elong=((P.Moon.lon-P.Sun.lon)%360+360)%360;
-  const bright=elong>=90&&elong<270, waning=!bright;     // kshina chandra: Krishna Ashtami to Shukla Ashtami
+  const elong=((P.Moon.lon-P.Sun.lon)%360+360)%360, bright=elong>=90&&elong<270, waning=!bright;
   const malSet=BALA_MAL.slice();
   const benSet=['Jupiter','Venus'].concat(BALA_MAL.some(g=>S[g]===S.Mercury)?[]:['Mercury']).concat(bright?['Moon']:[]);
   const aspects=(g,sign)=>{ const d=((sign-S[g]+12)%12)+1; return (BALA_ASP[g]||[7]).includes(d); };
   const infl=(sign,set,skip)=>set.filter(g=>g!==skip&&(S[g]===sign||aspects(g,sign)));
   const inH=(g,...hs)=>hs.includes(H[g]);
   const malIn=h=>malSet.filter(g=>H[g]===h);
+  const fromS=(g,ref)=>((S[g]-S[ref]+12)%12)+1;
   const list=a=>a.map(pn).join(', ');
-  const found=[], bhanga=[];
-  const add=(name,detail,sev)=>found.push({name,detail,sev:sev||'b'});
+  const found=[], mit={child:[],mother:[],father:[]};
+  const add=(who,name,detail,sev,src)=>found.push({who,name,detail,sev:sev||'b',src:src||''});
+  const okB=(who,name,detail)=>mit[who].push({name,detail});
 
-  // 1. Moon in 6th, 8th or 12th, influenced by malefics (BPHS 9.3)
+  /* ---------- CHILD (BPHS 9.3–9.21) ---------- */
   if(inH('Moon',6,8,12)){ const m=infl(S.Moon,malSet,'Moon'), b=infl(S.Moon,benSet,'Moon');
-    if(m.length) add(Lx('சந்திரன் '+H.Moon+'ம் இடத்தில் பாப கிரக சம்பந்தத்துடன்','Moon in the '+ordn(H.Moon)+' house, influenced by malefics'),
-      Lx('சந்திரன் '+hseIn(H.Moon)+' உள்ளார்; '+list(m)+' சேர்க்கை அல்லது பார்வை உண்டு.'+(b.length?' சுபர் '+list(b)+' தொடர்பும் இருப்பதால் தீவிரம் குறையும் என்று பராசரர் கூறுவார்.':' சுபர் தொடர்பு இல்லை.'),
-         'The Moon is in the '+ordn(H.Moon)+' house, joined or aspected by '+m.join(', ')+'.'+(b.length?' Benefic influence from '+b.join(', ')+' softens it, says Parashara.':' No benefic influence.')), b.length?'m':'b'); }
-  // 2. Mars in Lagna afflicted, or Mars in 8th with Saturn or Sun (BPHS 9.6)
+    if(m.length) add(['child'],Lx('சந்திரன் '+H.Moon+'ம் இடத்தில் பாபர் தொடர்புடன்','Moon in the '+ordn(H.Moon)+' house with malefic influence'),
+      Lx('சந்திரன் '+hseIn(H.Moon)+'; '+list(m)+' சேர்க்கை அல்லது பார்வை.'+(b.length?' சுபர் '+list(b)+' தொடர்பும் உள்ளதால் தீவிரம் குறையும் என்பார் பராசரர்.':' சுபர் தொடர்பு இல்லை.'),
+         'The Moon is in the '+ordn(H.Moon)+' house, joined or aspected by '+m.join(', ')+'.'+(b.length?' Benefic influence from '+b.join(', ')+' softens it, says Parashara.':' No benefic influence.')), b.length?'m':'b','BPHS 9.3'); }
   if(H.Mars===1){ const m=infl(S.Mars,malSet,'Mars'), b=infl(S.Mars,benSet,'Mars');
-    if(m.length&&!b.length) add(Lx('லக்னத்தில் பாதிக்கப்பட்ட செவ்வாய்','Afflicted Mars in the Lagna'),Lx('செவ்வாய் லக்னத்தில் உள்ளார்; '+list(m)+' தொடர்பு உண்டு, சுபர் பார்வை இல்லை.','Mars is in the Lagna with '+m.join(', ')+' and no benefic aspect.')); }
-  if(H.Mars===8&&(S.Saturn===S.Mars||S.Sun===S.Mars)) add(Lx('8ம் இடத்தில் செவ்வாய் சனி/சூரியனுடன்','Mars in the 8th with Saturn or the Sun'),Lx('செவ்வாய் 8ம் இடத்தில் '+list(['Saturn','Sun'].filter(g=>S[g]===S.Mars))+' உடன் இணைந்துள்ளார்.','Mars is in the 8th house with '+['Saturn','Sun'].filter(g=>S[g]===S.Mars).join(' and ')+'.'));
-  // 3. Malefics in Lagna and 7th, Moon with a malefic, no benefic influence (BPHS 9.17)
+    if(m.length&&!b.length) add(['child'],Lx('லக்னத்தில் பாதிக்கப்பட்ட செவ்வாய்','Afflicted Mars in the Lagna'),Lx('செவ்வாய் லக்னத்தில்; '+list(m)+' தொடர்பு உண்டு, சுபர் பார்வை இல்லை.','Mars is in the Lagna with '+m.join(', ')+' and no benefic aspect.'),'b','BPHS 9.6'); }
+  if(H.Mars===8&&(S.Saturn===S.Mars||S.Sun===S.Mars)){ const w=['Saturn','Sun'].filter(g=>S[g]===S.Mars);
+    add(['child'],Lx('8ம் இடத்தில் செவ்வாய் '+list(w)+' உடன்','Mars in the 8th with '+w.join(' and ')),Lx('செவ்வாய் 8ம் இடத்தில் '+list(w)+' உடன் இணைந்துள்ளார்.','Mars is in the 8th house together with '+w.join(' and ')+'.'),'b','BPHS 9.6'); }
   if(malIn(1).length&&malIn(7).length&&malSet.some(g=>S[g]===S.Moon)&&!infl(S.Moon,benSet,'Moon').length&&!infl(F.L,benSet).length)
-    add(Lx('லக்னம், 7ம் இடம் இரண்டிலும் பாபர்; சந்திரனுடன் பாபர்','Malefics in the Lagna and 7th, Moon with a malefic'),Lx('லக்னத்தில் '+list(malIn(1))+', 7ம் இடத்தில் '+list(malIn(7))+'; சந்திரனுக்கோ லக்னத்திற்கோ சுபர் தொடர்பு இல்லை.','Lagna: '+malIn(1).join(', ')+'; 7th: '+malIn(7).join(', ')+'; no benefic touches the Moon or the Lagna.'));
-  // 4. Waning Moon in Lagna, malefics in kendras and the 8th (BPHS 9.18)
+    add(['child'],Lx('லக்னம், 7ம் இடம் இரண்டிலும் பாபர்; சந்திரனுடன் பாபர்','Malefics in the Lagna and 7th, Moon with a malefic'),Lx('லக்னத்தில் '+list(malIn(1))+', 7ம் இடத்தில் '+list(malIn(7))+'; சந்திரனுக்கோ லக்னத்திற்கோ சுபர் தொடர்பு இல்லை.','Lagna: '+malIn(1).join(', ')+'; 7th: '+malIn(7).join(', ')+'; no benefic touches the Moon or the Lagna.'),'b','BPHS 9.17');
   if(H.Moon===1&&waning&&malIn(8).length&&[4,7,10].some(h=>malIn(h).length))
-    add(Lx('லக்னத்தில் தேய்பிறைச் சந்திரன்; கேந்திரம், 8ம் இடத்தில் பாபர்','Waning Moon in the Lagna, malefics in kendras and the 8th'),Lx('தேய்பிறைச் சந்திரன் லக்னத்தில்; 8ம் இடத்தில் '+list(malIn(8))+'; கேந்திரத்திலும் பாபர் உண்டு.','A waning Moon in the Lagna, '+malIn(8).join(', ')+' in the 8th and malefics in kendras.'));
-  // 5. Moon hemmed between malefics while in 1, 7, 8 or 12 (BPHS 9.19-20)
-  { const s2=(S.Moon+1)%12, s12=(S.Moon+11)%12, a=malSet.filter(g=>S[g]===s2), c=malSet.filter(g=>S[g]===s12);
-    if(a.length&&c.length&&inH('Moon',1,7,8,12)) add(Lx('பாபகர்த்தரியில் சந்திரன்','Moon hemmed between malefics'),Lx('சந்திரன் '+hseIn(H.Moon)+'; இருபுறமும் பாபர்: '+list(c)+' (12ம் இடம்), '+list(a)+' (2ம் இடம்).','The Moon is in the '+ordn(H.Moon)+' house with '+c.join(', ')+' behind it and '+a.join(', ')+' ahead of it.')); }
-  // 6. Lagna hemmed between malefics with malefics in 6th or 8th (BPHS 9.16)
+    add(['child'],Lx('லக்னத்தில் தேய்பிறைச் சந்திரன்; கேந்திரம், 8ம் இடத்தில் பாபர்','Waning Moon in the Lagna, malefics in kendras and the 8th'),Lx('தேய்பிறைச் சந்திரன் லக்னத்தில்; 8ம் இடத்தில் '+list(malIn(8))+'; கேந்திரத்திலும் பாபர் உண்டு.','A waning Moon in the Lagna, '+malIn(8).join(', ')+' in the 8th and malefics in kendras.'),'b','BPHS 9.18');
+  { const a=malSet.filter(g=>S[g]===(S.Moon+1)%12), c=malSet.filter(g=>S[g]===(S.Moon+11)%12);
+    if(a.length&&c.length&&inH('Moon',1,7,8,12)){ const withMother=H.Moon===1&&(malIn(7).length||malIn(8).length);
+      add(withMother?['child','mother']:['child'],Lx('பாபகர்த்தரியில் சந்திரன்','Moon hemmed between malefics'),
+        Lx('சந்திரன் '+hseIn(H.Moon)+'; இருபுறமும் பாபர்: '+list(c)+' (பின்), '+list(a)+' (முன்).'+(withMother?' சந்திரன் லக்னத்தில், 7/8ம் இடத்திலும் பாபர் இருப்பதால் தாய்க்கும் இது பொருந்தும் என்பார் பராசரர் (9.20).':''),
+           'The Moon is in the '+ordn(H.Moon)+' house with '+c.join(', ')+' behind and '+a.join(', ')+' ahead.'+(withMother?' With the Moon in the Lagna and a malefic in the 7th or 8th, Parashara (9.20) extends this to the mother.':'')),'b','BPHS 9.19–20'); } }
   if(malIn(2).length&&malIn(12).length&&(malIn(6).length||malIn(8).length))
-    add(Lx('பாபகர்த்தரியில் லக்னம்','Lagna hemmed between malefics'),Lx('12ம் இடத்தில் '+list(malIn(12))+', 2ம் இடத்தில் '+list(malIn(2))+'; 6 அல்லது 8ம் இடத்திலும் பாபர் உண்டு.','Malefics in the 12th ('+malIn(12).join(', ')+') and 2nd ('+malIn(2).join(', ')+'), with a malefic also in the 6th or 8th.'));
-  // 7. Specific combinations (BPHS 9.8, 9.9, 9.21)
-  if(H.Saturn===10&&H.Moon===6&&H.Mars===7) add(Lx('சனி 10, சந்திரன் 6, செவ்வாய் 7','Saturn 10th, Moon 6th, Mars 7th'),Lx('பராசரர் குறிப்பிடும் தனி அமைப்பு; தாய்க்கும் கவனம் தேவை எனக் கூறப்படும்.','A specific combination named by Parashara; the mother’s health is also said to need care.'));
-  if(H.Saturn===1&&H.Moon===8&&H.Jupiter===3) add(Lx('சனி லக்னம், சந்திரன் 8, குரு 3','Saturn in the Lagna, Moon 8th, Jupiter 3rd'),Lx('பராசரர் குறிப்பிடும் தனி அமைப்பு.','A specific combination named by Parashara.'));
-  if(H.Saturn===12&&H.Sun===9&&H.Mars===8&&!infl(F.L,benSet).length) add(Lx('சனி 12, சூரியன் 9, செவ்வாய் 8','Saturn 12th, Sun 9th, Mars 8th'),Lx('சுபர் பார்வை இல்லாமல் இந்த அமைப்பு உள்ளது.','This combination is present with no benefic aspect.'));
-  // 8. Birth-time conditions (BPHS 9.13): gandanta, sandhya; eclipse (BPHS 9.7)
-  const mi=Math.floor(P.Moon.lon/Jyo.NAK), mp=Math.floor((P.Moon.lon%Jyo.NAK)/(Jyo.NAK/4))+1;
-  if(([8,17,26].includes(mi)&&mp===4)||([9,18,0].includes(mi)&&mp===1))
-    add(Lx('நட்சத்திர கண்டாந்தம்','Nakshatra gandanta'),Lx(nkn(mi)+' '+mp+'ம் பாதத்தில் பிறப்பு: நீர் ராசி முடிந்து நெருப்பு ராசி தொடங்கும் சந்தி. (சில மரபுகள் சந்திக்கு இருபுறமும் 2 நாழிகை மட்டுமே கொள்ளும்.)','Born in '+NAK_EN[mi]+' pada '+mp+', the junction where a water sign ends and a fire sign begins. (Some traditions take only 2 ghatikas either side of the junction.)'),'m');
+    add(['child'],Lx('பாபகர்த்தரியில் லக்னம்','Lagna hemmed between malefics'),Lx('12ம் இடத்தில் '+list(malIn(12))+', 2ம் இடத்தில் '+list(malIn(2))+'; 6/8ம் இடத்திலும் பாபர்.','Malefics in the 12th ('+malIn(12).join(', ')+') and 2nd ('+malIn(2).join(', ')+'), with a malefic in the 6th or 8th too.'),'b','BPHS 9.16');
+  if(H.Saturn===10&&H.Moon===6&&H.Mars===7) add(['child','mother'],Lx('சனி 10, சந்திரன் 6, செவ்வாய் 7','Saturn 10th, Moon 6th, Mars 7th'),Lx('பராசரர் குழந்தைக்கும் தாய்க்கும் சேர்த்துக் கூறும் அமைப்பு.','A combination Parashara names for both the child and the mother.'),'b','BPHS 9.8');
+  if(H.Saturn===1&&H.Moon===8&&H.Jupiter===3) add(['child'],Lx('சனி லக்னம், சந்திரன் 8, குரு 3','Saturn in the Lagna, Moon 8th, Jupiter 3rd'),Lx('பராசரர் குறிப்பிடும் தனி அமைப்பு.','A specific combination named by Parashara.'),'b','BPHS 9.9');
+  if(H.Saturn===12&&H.Sun===9&&H.Mars===8&&!infl(F.L,benSet).length) add(['child'],Lx('சனி 12, சூரியன் 9, செவ்வாய் 8','Saturn 12th, Sun 9th, Mars 8th'),Lx('சுபர் பார்வை இல்லாமல் இந்த அமைப்பு உள்ளது.','This combination is present with no benefic aspect.'),'b','BPHS 9.21');
   const ad=asc%30, as=Math.floor(asc/30);
   if(([3,7,11].includes(as)&&ad>=30-10/3)||([4,8,0].includes(as)&&ad<10/3))
-    add(Lx('லக்ன கண்டாந்தம்','Lagna gandanta'),Lx('லக்னம் '+sgn(as)+' '+fmtDeg(asc)+': நீர்–நெருப்பு ராசிச் சந்தியின் கடைசி/முதல் நவாம்சம்.','The Lagna is at '+RASI_EN[as]+' '+fmtDeg(asc)+', in the last or first navamsa of a water–fire junction.'),'m');
-  if(st){ const near=t=>t&&Math.abs(birth-t)<=24*60000;
-    if(near(st.rise)||near(st.set)) add(Lx('சந்தியா காலப் பிறப்பு','Twilight (sandhya) birth'),Lx('சூரிய '+(near(st.rise)?'உதய':'அஸ்தமன')+' நேரத்திற்கு 24 நிமிடங்களுக்குள் ('+timeL(near(st.rise)?st.rise:st.set,tz)+') பிறப்பு.','Born within 24 minutes of sun'+(near(st.rise)?'rise':'set')+' ('+timeL(near(st.rise)?st.rise:st.set,tz)+').'),'m'); }
+    add(['child'],Lx('லக்ன கண்டாந்தம்','Lagna gandanta'),Lx('லக்னம் '+sgn(as)+' '+fmtDeg(asc)+': நீர்–நெருப்பு ராசிச் சந்தியின் கடைசி/முதல் நவாம்சம்.','The Lagna is at '+RASI_EN[as]+' '+fmtDeg(asc)+', in the last or first navamsa of a water–fire junction.'),'m','BPHS 9.13');
+  if(st){ const near=t=>t&&Math.abs(birth-t)<=24*60000, r=near(st.rise);
+    if(r||near(st.set)) add(['child'],Lx('சந்தியா காலப் பிறப்பு','Twilight (sandhya) birth'),Lx('சூரிய '+(r?'உதய':'அஸ்தமன')+' நேரத்திற்கு ('+timeL(r?st.rise:st.set,tz)+') 24 நிமிடங்களுக்குள் பிறப்பு.','Born within 24 minutes of sun'+(r?'rise':'set')+' ('+timeL(r?st.rise:st.set,tz)+').'),'m','BPHS 9.13'); }
   { const nd=x=>Math.min(Math.abs(((x-P.Rahu.lon+540)%360)-180),Math.abs(((x-P.Ketu.lon+540)%360)-180));
     const newM=elong<12||elong>348, fullM=Math.abs(elong-180)<12;
     if((newM&&nd(P.Sun.lon)<15)||(fullM&&nd(P.Moon.lon)<12))
-      add(Lx('கிரகணத்தை ஒட்டிய பிறப்பு','Birth near an eclipse'),Lx((newM?'அமாவாசை':'பௌர்ணமி')+' அருகில், சூரியன்/சந்திரன் ராகு–கேது அச்சுக்கு நெருக்கமாக உள்ளனர் (தோராயமான கணிப்பு).','Close to a '+(newM?'new':'full')+' moon with the Sun and Moon near the Rahu–Ketu axis (approximate check).'),'m'); }
+      add(['child'],Lx('கிரகணத்தை ஒட்டிய பிறப்பு','Birth near an eclipse'),Lx((newM?'அமாவாசை':'பௌர்ணமி')+' அருகில், சூரியன்/சந்திரன் ராகு–கேது அச்சுக்கு நெருக்கமாக (தோராயமான கணிப்பு).','Close to a '+(newM?'new':'full')+' moon with the Sun and Moon near the Rahu–Ketu axis (approximate).'),'m','BPHS 9.7'); }
 
-  // ---- Arishta-bhanga (Sarvartha Chintamani) ----
-  const okB=(name,detail)=>bhanga.push({name,detail});
-  if(H.Jupiter===1&&F.dignity('Jupiter')!=='debilitated') okB(Lx('லக்னத்தில் குரு','Jupiter in the Lagna'),Lx('குரு லக்னத்தில் இருப்பது பாலாரிஷ்டத்தை நீக்கும் முதன்மை விதி.','Jupiter in the Lagna is the foremost cancellation of Balarishta.'));
+  /* ---------- Ganda-moola nakshatra (pada-wise: whom it concerns) ---------- */
+  const mi=Math.floor(P.Moon.lon/Jyo.NAK), mp=Math.floor((P.Moon.lon%Jyo.NAK)/(Jyo.NAK/4))+1, gp=GANDA_PADA[mi]&&GANDA_PADA[mi][mp];
+  let gandaNote=null;
+  if(gp){ const isG=([8,17,26].includes(mi)&&mp===4)||([9,18,0].includes(mi)&&mp===1), base=nkn(mi)+' '+mp+Lx('ம் பாதம்',' pada');
+    const gtxt=isG?Lx(' இது நட்சத்திர கண்டாந்தமும் கூட (நீர்–நெருப்பு ராசிச் சந்தி).',' This pada is also the nakshatra gandanta, the water–fire junction.'):'';
+    if(gp[0]==='shubha') gandaNote={cls:'g',name:Lx('கண்ட மூல நட்சத்திரம்: சுப பாதம்','Ganda-moola star: auspicious pada'),detail:Lx(base+': மரபுப்படி இந்தப் பாதம் சுபம்; உறவினருக்குக் குறிப்பிட்ட தோஷம் கூறப்படவில்லை.',base+': by tradition this pada is auspicious, with no concern named for any relative.')};
+    else if(gp[0]==='general') gandaNote={cls:'m',name:Lx('கண்ட மூல நட்சத்திரம்','Ganda-moola star'),detail:Lx(base+': இந்தப் பாதத்திற்குக் குறிப்பிட்ட உறவினர் கூறப்படவில்லை; பொதுவான நட்சத்திர சாந்தி மட்டும் மரபு.',base+': no particular relative is named for this pada; only the general nakshatra shanti is customary.')+gtxt};
+    else { const who=gp[0], var_=gp[1]?Lx(' ('+gp[1]+')',' ('+gp[2]+')'):'';
+      add([who],Lx('கண்ட மூல நட்சத்திரம்: '+base,'Ganda-moola star: '+NAK_EN[mi]+' pada '+mp),
+        Lx(base+' – மரபுப்படி இது '+({child:'குழந்தையை',mother:'தாயை',father:'தந்தையை',sib:'உடன்பிறப்பை',family:'குடும்பச் செல்வத்தை'})[who]+'க் குறிக்கும்'+var_+'.'+gtxt,
+           NAK_EN[mi]+' pada '+mp+': by tradition this concerns the '+(who==='family'?'family’s wealth':BALA_WHO[who][1].toLowerCase())+var_+'.'+gtxt),'m','Muhurta Chintamani'); }
+  }
+
+  /* ---------- MOTHER (matru arishta, BPHS 9.24, 9.28, 9.31) ---------- */
+  { const m=infl(S.Moon,malSet,'Moon'), nodes=m.filter(g=>g==='Rahu'||g==='Ketu').length; if(m.length-(nodes>1?1:0)>=3) add(['mother'],Lx('சந்திரன் மீது மூன்று பாபர் தொடர்பு','Moon influenced by three malefics'),Lx('சந்திரனை '+list(m)+' சேர்ந்தோ பார்த்தோ உள்ளனர். சந்திரன் தாயைக் குறிக்கும் கிரகம்.','The Moon, which signifies the mother, is joined or aspected by '+m.join(', ')+'.'),'b','BPHS 9.24'); }
+  { const g4=malSet.filter(g=>fromS(g,'Moon')===4&&BALA_ENEMY[g]&&BALA_ENEMY[g].includes(SIGN_LORD[S[g]]));
+    const benK=['Jupiter','Venus','Mercury'].filter(g=>benSet.includes(g)&&[1,4,7,10].includes(H[g]));
+    if(g4.length&&!benK.length) add(['mother'],Lx('சந்திரனுக்கு 4ம் இடத்தில் பகை வீட்டில் பாபர்','Malefic in the 4th from the Moon, in an enemy sign'),Lx(list(g4)+' சந்திரனுக்கு 4ம் இடத்தில் ('+sgn(S[g4[0]])+') பகை வீட்டில்; கேந்திரத்தில் சுபர் இல்லை.',g4.join(', ')+' in the 4th from the Moon ('+RASI_EN[S[g4[0]]]+'), an enemy sign, and no benefic in a kendra.'),'b','BPHS 9.28'); }
+  if(H.Jupiter===1&&H.Saturn===1&&H.Rahu===2) add(['mother'],Lx('குரு, சனி லக்னத்தில்; ராகு 2ல்','Jupiter and Saturn in the Lagna, Rahu in the 2nd'),Lx('பராசரர் தாயின் நலனுக்குக் கவனம் தேவை எனக் கூறும் அமைப்பு.','A combination Parashara links with the mother’s wellbeing.'),'b','BPHS 9.31');
+
+  /* ---------- FATHER (pitru arishta, BPHS 9.34/39, 9.36, 9.38) ---------- */
+  if(H.Saturn===1&&H.Mars===7&&H.Moon===6) add(['father'],Lx('சனி லக்னம், செவ்வாய் 7, சந்திரன் 6','Saturn in the Lagna, Mars 7th, Moon 6th'),Lx('பராசரர் தந்தைக்குக் கூறும் அமைப்பு.','A combination Parashara names for the father.'),'b','BPHS 9.34');
+  { const withSun=malSet.filter(g=>g!=='Sun'&&S[g]===S.Sun), hem=malSet.some(g=>S[g]===(S.Sun+1)%12)&&malSet.some(g=>S[g]===(S.Sun+11)%12), opp=malSet.filter(g=>g!=='Sun'&&S[g]===(S.Sun+6)%12);
+    if((withSun.length||hem)&&opp.length&&!infl(S.Sun,benSet,'Sun').length)
+      add(['father'],Lx('சூரியன் பாபர் பிடியில்; சூரியனுக்கு 7ல் பாபர்','Sun afflicted, with a malefic opposite it'),Lx('சூரியன் (தந்தைக் காரகன்) '+(withSun.length?list(withSun)+' உடன் இணைந்து':'இருபுறமும் பாபர் நடுவே')+'; 7ம் பார்வையில் '+list(opp)+'; சுபர் பார்வை இல்லை.','The Sun (significator of the father) is '+(withSun.length?'with '+withSun.join(', '):'hemmed between malefics')+', with '+opp.join(', ')+' opposite and no benefic aspect.'),'b','BPHS 9.36'); }
+  if(H.Mars===10&&BALA_ENEMY.Mars.includes(SIGN_LORD[S.Mars])) add(['father'],Lx('10ம் இடத்தில் பகை வீட்டுச் செவ்வாய்','Mars in the 10th in an enemy sign'),Lx('செவ்வாய் 10ம் இடத்தில் '+sgn(S.Mars)+' (பகை வீடு).','Mars is in the 10th house in '+RASI_EN[S.Mars]+', an enemy sign.'),'b','BPHS 9.38');
+
+  /* ---------- FAMILY (BPHS 9.30) ---------- */
+  if(malIn(1).length&&malIn(7).length&&malIn(12).length&&['Jupiter','Venus','Mercury'].some(g=>benSet.includes(g)&&H[g]===2))
+    add(['family'],Lx('லக்னம், 7, 12ல் பாபர்; 2ல் சுபர்','Malefics in the Lagna, 7th and 12th; benefic in the 2nd'),Lx('பராசரர் குடும்ப நலனுக்குக் கவனம் தேவை எனக் கூறும் அமைப்பு.','A combination Parashara links with the family’s fortunes.'),'b','BPHS 9.30');
+
+  /* ---------- mitigations ---------- */
+  if(H.Jupiter===1&&F.dignity('Jupiter')!=='debilitated') okB('child',Lx('லக்னத்தில் குரு','Jupiter in the Lagna'),Lx('பாலாரிஷ்டத்தை நீக்கும் முதன்மை விதி.','The foremost cancellation of Balarishta.'));
   { const ll=F.lordOf(1); if([1,4,7,10].includes(H[ll])&&infl(S[ll],benSet,ll).length&&!infl(S[ll],malSet,ll).length)
-    okB(Lx('லக்னாதிபதி கேந்திரத்தில் சுபர் தொடர்புடன்','Lagna lord strong in a kendra'),Lx('லக்னாதிபதி '+pn(ll)+' '+hseIn(H[ll])+'; '+list(infl(S[ll],benSet,ll))+' தொடர்பு உண்டு, பாபர் தொடர்பு இல்லை.','The Lagna lord '+ll+' is in the '+ordn(H[ll])+' house with '+infl(S[ll],benSet,ll).join(', ')+' and no malefic influence.')); }
+    okB('child',Lx('லக்னாதிபதி கேந்திரத்தில் சுபர் தொடர்புடன்','Lagna lord strong in a kendra'),Lx(pn(ll)+' '+hseIn(H[ll])+'; '+list(infl(S[ll],benSet,ll))+' தொடர்பு; பாபர் தொடர்பு இல்லை.',ll+' in the '+ordn(H[ll])+' house with '+infl(S[ll],benSet,ll).join(', ')+' and no malefic influence.')); }
   { const j=infl(S.Moon,['Jupiter'],'Moon').length, b=infl(S.Moon,benSet,'Moon');
-    if(j&&(bright||BALA_BEN_SIGNS.includes(S.Moon))) okB(Lx('சந்திரனுக்குக் குரு பார்வை','Jupiter influences the Moon'),Lx('குரு சந்திரனுடன் இணைந்து அல்லது பார்த்து உள்ளார்; சந்திரன் '+(bright?'வளர்பிறை ஒளியுடன்':'சுப ராசியில்')+' உள்ளார்.','Jupiter joins or aspects the Moon, which is '+(bright?'bright':'in a benefic sign')+'.'));
-    else if(bright&&BALA_BEN_SIGNS.includes(S.Moon)&&b.length) okB(Lx('சுப ராசியில் ஒளிமிக்க சந்திரன்','Bright Moon in a benefic sign'),Lx('ஒளிமிக்க சந்திரன் '+sgn(S.Moon)+' ராசியில், '+list(b)+' தொடர்புடன்.','A bright Moon in '+RASI_EN[S.Moon]+' with '+b.join(', ')+'.')); }
+    if(j&&(bright||BALA_BEN_SIGNS.includes(S.Moon))) okB('child',Lx('சந்திரனுக்குக் குரு தொடர்பு','Jupiter influences the Moon'),Lx('குரு சந்திரனுடன் இணைந்து அல்லது பார்த்து; சந்திரன் '+(bright?'வளர்பிறை ஒளியுடன்':'சுப ராசியில்')+'.','Jupiter joins or aspects the Moon, which is '+(bright?'bright':'in a benefic sign')+'.'));
+    else if(bright&&BALA_BEN_SIGNS.includes(S.Moon)&&b.length) okB('child',Lx('சுப ராசியில் ஒளிமிக்க சந்திரன்','Bright Moon in a benefic sign'),Lx(sgn(S.Moon)+' ராசியில், '+list(b)+' தொடர்புடன்.','In '+RASI_EN[S.Moon]+' with '+b.join(', ')+'.')); }
   { const kb=['Jupiter','Venus','Mercury'].filter(g=>benSet.includes(g)&&[1,4,7,10].includes(H[g])&&!infl(S[g],malSet,g).length);
-    if(kb.length) okB(Lx('கேந்திரத்தில் தூய சுபர்','Unafflicted benefics in kendras'),Lx(list(kb)+' கேந்திரத்தில் பாபர் தொடர்பின்றி உள்ளனர்.',kb.join(', ')+' in kendras, free of malefic influence.')); }
+    if(kb.length) okB('child',Lx('கேந்திரத்தில் தூய சுபர்','Unafflicted benefics in kendras'),Lx(list(kb)+' கேந்திரத்தில், பாபர் தொடர்பின்றி.',kb.join(', ')+' in kendras, free of malefic influence.')); }
   { const ml=SIGN_LORD[S.Moon]; if(ml!=='Moon'&&[1,4,7,10].includes(H[ml])&&infl(S[ml],benSet,ml).length)
-    okB(Lx('ராசியாதிபதி கேந்திரத்தில்','Moon-sign lord in a kendra'),Lx('ராசியாதிபதி '+pn(ml)+' '+hseIn(H[ml])+', சுபர் தொடர்புடன்.','The Moon-sign lord '+ml+' is in the '+ordn(H[ml])+' house with benefic influence.')); }
+    okB('child',Lx('ராசியாதிபதி கேந்திரத்தில்','Moon-sign lord in a kendra'),Lx(pn(ml)+' '+hseIn(H[ml])+', சுபர் தொடர்புடன்.',ml+' in the '+ordn(H[ml])+' house with benefic influence.')); }
   if([3,6,11].includes(H.Rahu)&&!infl(S.Rahu,malSet,'Rahu').length&&infl(S.Rahu,benSet,'Rahu').length)
-    okB(Lx('ராகு 3/6/11ல் சுபர் பார்வையுடன்','Rahu in the 3rd, 6th or 11th with benefic aspect'),Lx('ராகு '+hseIn(H.Rahu)+', பாபர் தொடர்பின்றி, சுபர் பார்வையுடன்.','Rahu is in the '+ordn(H.Rahu)+' house, free of malefics and aspected by a benefic.'));
-  if(S.Moon===1||S.Moon===3) okB(Lx('சந்திரன் '+(S.Moon===1?'உச்சம்':'ஆட்சி'),'Moon '+(S.Moon===1?'exalted':'in its own sign')),Lx('சந்திரன் '+sgn(S.Moon)+' ராசியில் வலுவாக உள்ளார்.','The Moon is strong in '+RASI_EN[S.Moon]+'.'));
+    okB('child',Lx('ராகு 3/6/11ல் சுபர் பார்வையுடன்','Rahu in the 3rd, 6th or 11th with benefic aspect'),Lx('ராகு '+hseIn(H.Rahu)+', பாபர் தொடர்பின்றி.','Rahu in the '+ordn(H.Rahu)+' house, free of malefics.'));
+  if(S.Moon===1||S.Moon===3) okB('child',Lx('சந்திரன் '+(S.Moon===1?'உச்சம்':'ஆட்சி'),'Moon '+(S.Moon===1?'exalted':'in its own sign')),Lx(sgn(S.Moon)+' ராசியில் வலுவான சந்திரன்.','A strong Moon in '+RASI_EN[S.Moon]+'.'));
+  { const jv=infl(S.Moon,['Jupiter','Venus'],'Moon'); if(jv.length) okB('mother',Lx('சந்திரனுக்கு '+list(jv)+' தொடர்பு','The Moon has '+jv.join(' and ')+' influence'),Lx('தாய்க் காரகன் சந்திரனைச் சுபர் சேர்வது/பார்ப்பது தாய்க்குப் பாதுகாப்பு (பராசரர் 9.24).','A benefic joining or aspecting the Moon, the mother’s significator, protects her (BPHS 9.24).')); }
+  { const bk=['Jupiter','Venus','Mercury'].filter(g=>benSet.includes(g)&&[1,4,7,10].includes(H[g])); if(bk.length) okB('mother',Lx('கேந்திரத்தில் சுபர்','A benefic in a kendra'),Lx(list(bk)+' கேந்திரத்தில் (பராசரர் 9.28).',bk.join(', ')+' in a kendra (BPHS 9.28).')); }
+  { const js=infl(S.Sun,['Jupiter','Venus'],'Sun'); if(js.length) okB('father',Lx('சூரியனுக்கு '+list(js)+' தொடர்பு','The Sun has '+js.join(' and ')+' influence'),Lx('தந்தைக் காரகன் சூரியனைச் சுபர் சேர்வது/பார்ப்பது தந்தைக்குப் பாதுகாப்பு.','A benefic joining or aspecting the Sun, the father’s significator, protects him.')); }
+  { const l9=F.lordOf(9); if([1,4,5,7,9,10].includes(H[l9])&&!infl(S[l9],malSet,l9).length) okB('father',Lx('9ம் அதிபதி வலுவாக','The 9th lord well placed'),Lx('9ம் அதிபதி (தந்தை ஸ்தானம்) '+pn(l9)+' '+hseIn(H[l9])+', பாபர் தொடர்பின்றி.','The 9th lord (house of the father), '+l9+', is in the '+ordn(H[l9])+' house, free of malefics.')); }
 
-  // ---- summary ----
+  /* ---------- status per person ---------- */
   const ageY=(Date.now()-birth)/(365.2425*86400000), end12=new Date(birth.getTime()+12*365.2425*86400000);
-  const severe=found.filter(f=>f.sev==='b').length;
-  let lv, head, txt;
-  if(!found.length){ lv='g'; head=Lx('குறிப்புகள் இல்லை','No indications'); txt=Lx('பராசரர் கூறும் அடிப்படை பாலாரிஷ்ட விதிகள் எதுவும் இந்த ஜாதகத்தில் பொருந்தவில்லை.','None of the basic Balarishta rules of Parashara apply to this chart.'); }
-  else if(bhanga.length){ lv='m'; head=Lx('பங்கம் உண்டு','Cancelled or softened'); txt=Lx(found.length+' குறிப்பு'+(found.length>1?'கள்':'')+' காணப்படுகின்றன; ஆனால் '+bhanga.length+' அரிஷ்ட பங்க விதி'+(bhanga.length>1?'கள்':'')+' பொருந்துவதால் இவை பெரிதும் தணிகின்றன என்பது பாரம்பரியக் கருத்து.',found.length+' indication'+(found.length>1?'s are':' is')+' present, but '+bhanga.length+' cancellation rule'+(bhanga.length>1?'s apply':' applies')+', which tradition holds largely neutralises '+(found.length>1?'them':'it')+'.'); }
-  else { lv=severe?'b':'m'; head=Lx('கவனம்','Needs care'); txt=Lx(found.length+' குறிப்பு'+(found.length>1?'கள்':'')+' காணப்படுகின்றன; அரிஷ்ட பங்க விதி எதுவும் பொருந்தவில்லை. பாரம்பரியமாக இது குழந்தைப் பருவ ஆரோக்கியத்தில் கூடுதல் கவனம் தேவை என்பதைக் குறிக்கும்.',found.length+' indication'+(found.length>1?'s are':' is')+' present and no cancellation rule applies. Traditionally this calls for extra care of the child’s health in the early years.'); }
+  const forWho=k=>found.filter(f=>f.who.includes(k));
+  const status=k=>{ const f=forWho(k), m=mit[k]||[];
+    if(!f.length) return ['g',Lx('குறிப்பு இல்லை','No indication'),Lx('அடிப்படை விதிகள் எதுவும் பொருந்தவில்லை.','None of the basic rules apply.')];
+    const sev=f.some(x=>x.sev==='b');
+    if(m.length) return ['m',Lx('தணிவு உண்டு','Softened'),Lx(f.length+' குறிப்பு, '+m.length+' தணிக்கும் அமைப்பு.',f.length+' indication'+(f.length>1?'s':'')+', '+m.length+' mitigating factor'+(m.length>1?'s':'')+'.')];
+    return [sev?'b':'m',sev?Lx('கவனம்','Needs care'):Lx('குறிப்பு','Note'),Lx(f.length+' குறிப்பு; தணிக்கும் அமைப்பு இல்லை.',f.length+' indication'+(f.length>1?'s':'')+', no mitigating factor.')];
+  };
+  const people=['child','mother','father','sib','family'];
+  const item=(cls,name,chip,detail)=>'<div class="poritem '+cls+'"><div class="pi-h"><span class="pi-t">'+name+'</span><span class="chip '+cls+'">'+chip+'</span></div><div class="pi-calc">'+detail+'</div></div>';
+  const tile=k=>{ const s=status(k); return '<div class="balatile '+s[0]+'"><div class="bt-who">'+whoL(k)+'</div><span class="chip '+s[0]+'">'+s[1]+'</span><div class="bt-s">'+s[2]+'</div></div>'; };
   const period = ageY>=12
     ? Lx('இந்த ஜாதகர் பாலாரிஷ்டக் காலத்தை (12 வயது வரை) கடந்துவிட்டார்; கீழே உள்ளவை வரலாற்றுக் குறிப்புகள் மட்டுமே.','This person is past the Balarishta period (up to age 12); what follows is of historical interest only.')
-    : Lx('பாலாரிஷ்டக் காலம்: '+dateL(end12,tz)+' வரை (12 வயது). சில நூல்கள் 8 வயது வரை என்றும் கொள்ளும்.','Balarishta period: until '+dateL(end12,tz)+' (age 12). Some texts take it to age 8.');
-  const item=(cls,name,chip,detail)=>'<div class="poritem '+cls+'"><div class="pi-h"><span class="pi-t">'+name+'</span><span class="chip '+cls+'">'+chip+'</span></div><div class="pi-calc">'+detail+'</div></div>';
-  box.innerHTML='<div class="h3">'+Lx('பாலாரிஷ்டம் · குழந்தைப் பருவ ஆரோக்கியக் குறிப்புகள்','Balarishta: early-childhood indications')+'</div>'+
-    '<div class="porlist balasum">'+item(lv,Lx('சுருக்கம்','Summary'),head,txt+'<div class="pi-why">'+period+'</div>')+'</div>'+
-    (found.length?'<div class="h4">'+Lx('காணப்படும் குறிப்புகள்','Indications found')+'</div><div class="porlist">'+found.map(f=>item(f.sev,f.name,f.sev==='b'?Lx('கவனம்','Caution'):Lx('குறிப்பு','Note'),f.detail)).join('')+'</div>':'')+
-    (bhanga.length?'<div class="h4">'+Lx('அரிஷ்ட பங்கம் (நீக்கும் அமைப்புகள்)','Cancellations (arishta-bhanga)')+'</div><div class="porlist">'+bhanga.map(x=>item('g',x.name,Lx('உண்டு','Present'),x.detail)).join('')+'</div>':'')+
-    (found.length&&ageY<12?'<div class="card balaadv"><div class="k">'+Lx('என்ன செய்யலாம்','What to do')+'</div><p>'+Lx('இது மருத்துவ முன்கணிப்பு அல்ல. குழந்தை மருத்துவரின் வழக்கமான பரிசோதனைகளையும் தடுப்பூசிகளையும் தவறாமல் பின்பற்றுவதே முதன்மையான பாதுகாப்பு. பாரம்பரியமாக ம்ருத்யுஞ்ஜய ஜபம், கண்டாந்த சாந்தி (கண்டாந்தப் பிறப்புக்கு) போன்ற பரிகாரங்கள் குடும்ப ஜோதிடரின் ஆலோசனையுடன் செய்யப்படும்.','This is not a medical forecast. Regular check-ups with the paediatrician and keeping to the vaccination schedule are the real protection. Traditionally, remedies such as Mrityunjaya japa, and Gandanta shanti for a gandanta birth, are done on the advice of the family astrologer.')+'</p></div>':'')+
-    '<p class="note">'+Lx('பராசரரின் பிருஹத் பராசர ஹோரா சாஸ்திரம் (அத்தியாயம் 9, அரிஷ்டம்), வேங்கடேசரின் சர்வார்த்த சிந்தாமணி (அரிஷ்ட பங்கம்) ஆகியவற்றின் அடிப்படை விதிகள் மட்டும்; முழு ராசி பாவ முறை. பாலாரிஷ்டம் கிரக வலிமை, தசை, பெற்றோர் ஜாதகம் ஆகியவற்றுடன் சேர்த்தே பார்க்கப்பட வேண்டும் என நூல்கள் கூறும். இவை சோதிக்கப்பட்ட முன்கணிப்புகள் அல்ல.','Basic rules only, from Parashara’s Brihat Parashara Hora Shastra (ch. 9, Arishta) and Venkatesa’s Sarvartha Chintamani (arishta-bhanga), using whole-sign houses. The texts say Balarishta must be judged together with planetary strength, dasha and the parents’ charts. These are not tested forecasts.')+'</p>';
+    : Lx('பாலாரிஷ்டக் காலம்: '+dateL(end12,tz)+' வரை (12 வயது). சில நூல்கள் 8 வயது வரை என்று கொள்ளும். தாய், தந்தை குறித்த குறிப்புகள் பெரும்பாலும் இதே ஆரம்ப ஆண்டுகளுக்கே.','Balarishta period: until '+dateL(end12,tz)+' (age 12); some texts take it to age 8. The notes about the mother and father also refer mainly to these early years.');
+  let html='<div class="h3">'+Lx('பாலாரிஷ்டம் · யாருக்கு என்ன குறிப்பு','Balarishta: what applies to whom')+'</div>'+
+    '<p class="note" style="margin-top:0">'+Lx('பிறந்த ஜாதகம் குழந்தைக்கு மட்டுமல்லாமல் பெற்றோர், உடன்பிறப்புகள் குறித்தும் சில குறிப்புகளைத் தரும் என நூல்கள் கூறும். ஒவ்வொரு குறிப்பும் யாரைக் குறிக்கிறது என்பது கீழே தனித்தனியாக.','The texts say a birth chart also carries indications for the parents and siblings, not only the child. Each indication below is shown under the person it concerns.')+'</p>'+
+    '<div class="balagrid">'+people.filter(k=>k!=='sib'&&k!=='family'||forWho(k).length).map(tile).join('')+'</div>'+
+    '<p class="note">'+period+'</p>';
+  for(const k of people){
+    const f=forWho(k), m=mit[k]||[]; if(!f.length) continue;
+    html+='<div class="h4">'+Lx(whoL(k)+' குறித்து','About the '+BALA_WHO[k][1].toLowerCase())+'</div><div class="porlist">'+
+      f.map(x=>{ const also=x.who.filter(w=>w!==k); return item(x.sev,x.name,x.sev==='b'?Lx('கவனம்','Caution'):Lx('குறிப்பு','Note'),
+        x.detail+'<div class="pi-why">'+Lx('யாருக்கு: ','Concerns: ')+x.who.map(whoL).join(Lx(', ',' and '))+(x.src?' · '+Lx('மூலம்: '+x.src.replace('BPHS','பராசரர்').replace('Muhurta Chintamani','முகூர்த்த சிந்தாமணி'),'Source: '+x.src):'')+'</div>'); }).join('')+
+      m.map(x=>item('g',x.name,Lx('தணிவு','Mitigates'),x.detail)).join('')+'</div>';
+  }
+  if(gandaNote) html+='<div class="h4">'+Lx('கண்ட மூல நட்சத்திரம்','Ganda-moola star')+'</div><div class="porlist">'+item(gandaNote.cls,gandaNote.name,gandaNote.cls==='g'?Lx('சுபம்','Auspicious'):Lx('குறிப்பு','Note'),gandaNote.detail)+'</div>';
+  const anyParent=forWho('mother').length||forWho('father').length, ganda=gp&&gp[0]!=='shubha';
+  if(found.length&&ageY<12) html+='<div class="card balaadv"><div class="k">'+Lx('என்ன செய்யலாம்','What to do')+'</div><p>'+
+    Lx('இவை மருத்துவ முன்கணிப்புகள் அல்ல. குழந்தைக்கு மருத்துவரின் வழக்கமான பரிசோதனைகளும் தடுப்பூசிகளுமே முதன்மையான பாதுகாப்பு.'+(anyParent?' பெற்றோரும் தங்கள் ஆரோக்கியப் பரிசோதனைகளைத் தவறாமல் செய்துகொள்ளலாம்.':'')+(ganda?' கண்ட மூல நட்சத்திரத்திற்கு, சந்திரன் மீண்டும் அதே நட்சத்திரத்திற்கு வரும் 27ம் நாள் நட்சத்திர சாந்தி செய்வது மரபு.':'')+' ம்ருத்யுஞ்ஜய ஜபம் போன்ற பரிகாரங்கள் குடும்ப ஜோதிடரின் ஆலோசனையுடன் செய்யப்படும்.',
+       'These are not medical forecasts. For the child, regular check-ups with the paediatrician and the vaccination schedule are the real protection.'+(anyParent?' The parents may also keep up their own health check-ups.':'')+(ganda?' For a Ganda-moola star, the customary nakshatra shanti is done on the 27th day, when the Moon returns to the birth star.':'')+' Remedies such as Mrityunjaya japa are done on the advice of the family astrologer.')+'</p></div>';
+  html+='<p class="note">'+Lx('பிருஹத் பராசர ஹோரா சாஸ்திரம் (அத்தியாயம் 9: அரிஷ்டம், மாத்ரு/பித்ரு அரிஷ்டம்), சர்வார்த்த சிந்தாமணி (அரிஷ்ட பங்கம்), முகூர்த்த சிந்தாமணி மரபு (கண்ட மூல பாதப் பலன்; நூல்களுக்கிடையே வேறுபாடு உண்டு) ஆகியவற்றின் அடிப்படை விதிகள் மட்டும்; முழு ராசி பாவ முறை. இவை கிரக வலிமை, தசை, பெற்றோர் ஜாதகங்களுடன் சேர்த்தே பார்க்கப்பட வேண்டும்; சோதிக்கப்பட்ட முன்கணிப்புகள் அல்ல.',
+    'Basic rules only, from Brihat Parashara Hora Shastra (ch. 9: arishta, including the mother and father), Sarvartha Chintamani (arishta-bhanga) and the Muhurta Chintamani tradition for the Ganda-moola padas (the texts differ here), using whole-sign houses. They should be read with planetary strength, dasha and the parents’ own charts, and are not tested forecasts.')+'</p>';
+  box.innerHTML=html;
 }
 
 </script>
