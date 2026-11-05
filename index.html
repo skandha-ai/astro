@@ -6,7 +6,7 @@
 <title>Skandha's Astro · ஜாதகம் · பஞ்சாங்கம் · பொருத்தம்</title>
 <meta name="description" content="இலவச தமிழ் ஜோதிடம்: ஜாதகம் (ராசி, நவாம்சம், தசை, யோகங்கள்), தினசரி பஞ்சாங்கம், ராசி பலன், சகாதேவர் ஆரூடம், திருமணப் பொருத்தம். Free Tamil astrology in Tamil and English, calculated on your own device.">
 <meta name="theme-color" content="#6a1b17">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%236a1b17'/%3E%3Cg fill='none' stroke='%23e9b949' stroke-width='3'%3E%3Crect x='10' y='10' width='44' height='44'/%3E%3Cpath d='M21 10v44M43 10v44M10 21h44M10 43h44'/%3E%3C/g%3E%3Crect x='21' y='21' width='22' height='22' fill='%236a1b17'/%3E%3Ccircle cx='32' cy='32' r='5' fill='%23e9b949'/%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E %3Crect width='512' height='512' rx='100' fill='%236a1b17'/%3E %3Ccircle cx='256' cy='256' r='214' fill='none' stroke='%23e9b949' stroke-width='10'/%3E %3Cpath d='M168 96 V292 A88 88 0 0 0 344 292 V96' fill='none' stroke='%23fffaf0' stroke-width='56' stroke-linecap='butt'/%3E %3Crect x='241' y='104' width='30' height='236' rx='15' fill='%23e0402a' stroke='%23e9b949' stroke-width='4'/%3E %3Cpath d='M256 392 C230 412 226 434 256 452 C286 434 282 412 256 392 Z' fill='%23fffaf0'/%3E %3C/svg%3E">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="manifest" href="manifest.webmanifest">
 <meta property="og:type" content="website">
@@ -45,7 +45,11 @@ body{margin:0;background:var(--bg);color:var(--ink);
   font-size:19px;line-height:1.6}
 .wrap{max-width:1320px;margin:0 auto;padding:28px 16px 64px}
 header{text-align:center;margin-bottom:22px}
-.om{font-size:22px;color:var(--turmeric)}
+.om{font-size:22px;color:var(--maroon);line-height:0;margin-bottom:6px}
+.om .logo-g{display:inline-block;width:92px;height:auto}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]) .om{color:var(--turmeric)} }
+:root[data-theme="dark"] .om{color:var(--turmeric)}
+@media (max-width:700px){ .om .logo-g{width:72px} }
 h1{margin:6px 0 2px;font-size:clamp(28px,5vw,42px);line-height:1.25;color:var(--maroon);font-weight:700}
 .sub{font-size:19px;color:var(--muted);margin:0}
 .panel{background:var(--paper);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow);padding:20px}
@@ -355,7 +359,7 @@ html[data-lang="both"] .ot,html[data-lang="both"] .xe{display:none!important}
 /* fields */
 .fld{display:flex;flex-direction:column;gap:4px;font-size:15px;color:var(--muted);min-width:0}
 @media (min-width:1001px){ .form .w3{grid-column:span 3} }
-.dmy{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.6fr) minmax(0,1fr);gap:8px}
+.dmy{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.45fr) minmax(0,1.1fr);gap:8px}
 .dmy select{font:inherit;font-size:18px;padding:10px 8px;border-radius:10px;border:1px solid var(--line);background:var(--cell);color:var(--ink);min-width:0;width:100%}
 .porside .dmy select{background:var(--paper)}
 .pp{position:relative}
@@ -415,6 +419,9 @@ html[data-lang="both"] .ot,html[data-lang="both"] .xe{display:none!important}
   body.printing #printArea{display:block}
   body{background:#fff;font-size:12.5pt;line-height:1.5}
   .ph-inv{text-align:center;margin:0 0 8px}
+  .ph-logo{display:block;margin:0 auto 6px;width:22mm;height:22mm}
+  .ph-logo svg{width:100%;height:100%}
+  .ph-logo .logo-g{color:#6a1b17}
   .ph-inv .inv-ta{font-size:17pt;font-weight:700;color:var(--maroon);letter-spacing:.02em}
   .ph-inv .inv-en{font-size:12pt;color:var(--turmeric);font-style:italic}
   .ph{text-align:center;border-bottom:2px solid var(--maroon);padding-bottom:8px;margin-bottom:14px}
@@ -467,7 +474,7 @@ html[data-lang="both"] .ot,html[data-lang="both"] .xe{display:none!important}
     <button class="themebtn" id="themeBtn" type="button" aria-label="Switch light or dark theme">◐ <span class="ot">நிறம்</span><span class="oe">Theme</span></button>
   </div>
   <header>
-    <div class="om">ஸ்ரீ</div>
+    <div class="om"><svg class="logo-g" xmlns="http://www.w3.org/2000/svg" viewBox="40 50 432 400" width="92" height="85" role="img" aria-label="ஸ்ரீ கணபதி · Sri Ganapathi"> <g fill="none" stroke="currentColor" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"> <path d="M196 158 L210 92 L236 122 L256 70 L276 122 L302 92 L316 158 Z"/> <path d="M190 158 H322"/> <circle cx="256" cy="104" r="7" fill="currentColor"/> <path d="M186 176 C120 150 74 196 86 262 C96 316 146 334 184 306"/> <path d="M326 176 C392 150 438 196 426 262 C416 316 366 334 328 306"/> <path d="M110 230 C118 262 140 282 168 286" stroke-width="8"/> <path d="M402 230 C394 262 372 282 344 286" stroke-width="8"/> <path d="M190 160 C176 200 176 250 196 290"/> <path d="M322 160 C336 200 336 250 316 290"/> <path d="M214 222 Q228 210 242 222 Q228 232 214 222 Z" fill="currentColor" stroke-width="5"/> <path d="M270 222 Q284 210 298 222 Q284 232 270 222 Z" fill="currentColor" stroke-width="5"/> <path d="M256 170 V196" style="stroke:var(--vermilion)" stroke-width="10"/> <path d="M232 248 C232 300 236 350 262 388 C284 420 330 418 336 388 C340 366 318 356 304 370"/> <path d="M280 248 C280 296 276 330 292 356"/> <path d="M214 286 C198 300 194 318 202 334" stroke="currentColor" stroke-width="12"/> <path d="M298 284 L304 296" stroke="currentColor" stroke-width="12"/> <path d="M300 384 C290 372 314 360 322 374 C330 388 310 398 300 384 Z" fill="currentColor" stroke="currentColor" stroke-width="4"/> </g> </svg></div>
     <h1>Skandha’s Astro</h1>
     <p class="sub"><span class="lt">ஜாதகம் · பஞ்சாங்கம் · ஆரூடம் · பொருத்தம்</span><span class="xe">Horoscope · Panchangam · Arudam · Porutham</span></p>
   </header>
@@ -677,7 +684,7 @@ let SL='both'; try{ const v=JSON.parse(localStorage.getItem('sc_lang')||'"both"'
 document.documentElement.setAttribute('data-lang',SL);
 const RX_TA=/[\u0B80-\u0BFF]/, RX_EN=/[A-Za-z]/;
 /* bilingual label pair, and a sentence available in both languages */
-const bi=(ta,en)=>'<span class="lt">'+ta+'</span><span class="sep"> · </span><span class="le">'+en+'</span>';
+const bi=(ta,en)=>'<span class="bil"><span class="lt">'+ta+'</span><span class="sep"> · </span><span class="le">'+en+'</span></span>';
 const tx=(ta,en)=>'<span class="ot">'+ta+'</span><span class="oe">'+en+'</span>';
 const txt=(ta,en)=>SL==='ta'?ta:SL==='en'?en:ta+' · '+en;   // plain text (inputs, titles)
 
@@ -1248,6 +1255,10 @@ $("search").addEventListener("input",e=>renderList(e.target.value));
 renderList();
 </script>
 <script>
+/* Logos: Thirunamam (icon, PDF) and a Ganapathi line sketch (page header, matching PDF). Original drawings. */
+const LOGO_NAMAM='<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"> <rect width="512" height="512" rx="100" fill="#6a1b17"/> <circle cx="256" cy="256" r="214" fill="none" stroke="#e9b949" stroke-width="10"/> <path d="M168 96 V292 A88 88 0 0 0 344 292 V96" fill="none" stroke="#fffaf0" stroke-width="56" stroke-linecap="butt"/> <rect x="241" y="104" width="30" height="236" rx="15" fill="#e0402a" stroke="#e9b949" stroke-width="4"/> <path d="M256 392 C230 412 226 434 256 452 C286 434 282 412 256 392 Z" fill="#fffaf0"/> </svg>';
+const LOGO_GANAPATHI='<svg class="logo-g" xmlns="http://www.w3.org/2000/svg" viewBox="40 50 432 400" width="92" height="85" role="img" aria-label="ஸ்ரீ கணபதி · Sri Ganapathi"> <g fill="none" stroke="currentColor" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"> <path d="M196 158 L210 92 L236 122 L256 70 L276 122 L302 92 L316 158 Z"/> <path d="M190 158 H322"/> <circle cx="256" cy="104" r="7" fill="currentColor"/> <path d="M186 176 C120 150 74 196 86 262 C96 316 146 334 184 306"/> <path d="M326 176 C392 150 438 196 426 262 C416 316 366 334 328 306"/> <path d="M110 230 C118 262 140 282 168 286" stroke-width="8"/> <path d="M402 230 C394 262 372 282 344 286" stroke-width="8"/> <path d="M190 160 C176 200 176 250 196 290"/> <path d="M322 160 C336 200 336 250 316 290"/> <path d="M214 222 Q228 210 242 222 Q228 232 214 222 Z" fill="currentColor" stroke-width="5"/> <path d="M270 222 Q284 210 298 222 Q284 232 270 222 Z" fill="currentColor" stroke-width="5"/> <path d="M256 170 V196" style="stroke:var(--vermilion)" stroke-width="10"/> <path d="M232 248 C232 300 236 350 262 388 C284 420 330 418 336 388 C340 366 318 356 304 370"/> <path d="M280 248 C280 296 276 330 292 356"/> <path d="M214 286 C198 300 194 318 202 334" stroke="currentColor" stroke-width="12"/> <path d="M298 284 L304 296" stroke="currentColor" stroke-width="12"/> <path d="M300 384 C290 372 314 360 322 374 C330 388 310 398 300 384 Z" fill="currentColor" stroke="currentColor" stroke-width="4"/> </g> </svg>';
+
 /* Places: GeoNames cities (CC BY 4.0, geonames.org) — India: all towns over 15,000 people; abroad: larger cities. */
 const PLACE_TZ=["Africa/Abidjan","Africa/Accra","Africa/Addis_Ababa","Africa/Algiers","Africa/Bamako","Africa/Brazzaville","Africa/Cairo","Africa/Casablanca","Africa/Conakry","Africa/Dakar","Africa/Dar_es_Salaam","Africa/Harare","Africa/Johannesburg","Africa/Kampala","Africa/Khartoum","Africa/Kinshasa","Africa/Lagos","Africa/Lome","Africa/Luanda","Africa/Lubumbashi","Africa/Lusaka","Africa/Mogadishu","Africa/Monrovia","Africa/Nairobi","Africa/Ouagadougou","America/Anchorage","America/Argentina/Buenos_Aires","America/Argentina/Cordoba","America/Bahia","America/Bogota","America/Boise","America/Caracas","America/Chicago","America/Ciudad_Juarez","America/Denver","America/Detroit","America/Edmonton","America/Fortaleza","America/Guayaquil","America/Halifax","America/Havana","America/Indiana/Indianapolis","America/Kentucky/Louisville","America/La_Paz","America/Lima","America/Los_Angeles","America/Manaus","America/Mexico_City","America/New_York","America/Phoenix","America/Recife","America/Regina","America/Santiago","America/Santo_Domingo","America/Sao_Paulo","America/Tijuana","America/Toronto","America/Vancouver","America/Winnipeg","Asia/Aden","Asia/Almaty","Asia/Baghdad","Asia/Bahrain","Asia/Baku","Asia/Bangkok","Asia/Beirut","Asia/Colombo","Asia/Damascus","Asia/Dhaka","Asia/Dubai","Asia/Ho_Chi_Minh","Asia/Hong_Kong","Asia/Jakarta","Asia/Kabul","Asia/Karachi","Asia/Kathmandu","Asia/Kolkata","Asia/Kuala_Lumpur","Asia/Kuching","Asia/Kuwait","Asia/Makassar","Asia/Manila","Asia/Muscat","Asia/Novosibirsk","Asia/Phnom_Penh","Asia/Pyongyang","Asia/Qatar","Asia/Riyadh","Asia/Seoul","Asia/Shanghai","Asia/Singapore","Asia/Taipei","Asia/Tashkent","Asia/Tehran","Asia/Tokyo","Asia/Urumqi","Asia/Yangon","Australia/Adelaide","Australia/Brisbane","Australia/Darwin","Australia/Hobart","Australia/Melbourne","Australia/Perth","Australia/Sydney","Europe/Amsterdam","Europe/Berlin","Europe/Bucharest","Europe/Budapest","Europe/Copenhagen","Europe/Dublin","Europe/Istanbul","Europe/Kyiv","Europe/London","Europe/Madrid","Europe/Minsk","Europe/Moscow","Europe/Oslo","Europe/Paris","Europe/Rome","Europe/Stockholm","Europe/Vienna","Europe/Warsaw","Europe/Zurich","Indian/Mauritius","Indian/Reunion","Pacific/Auckland","Pacific/Fiji","Pacific/Honolulu"];
 const PLACE_REG=[["Afghanistan",""],["Algeria",""],["Andaman & Nicobar",""],["Andhra Pradesh","ஆந்திரப் பிரதேசம்"],["Angola",""],["Argentina",""],["Arunachal Pradesh",""],["Assam",""],["Australia","ஆஸ்திரேலியா"],["Austria",""],["Azerbaijan",""],["Bahrain",""],["Bangladesh",""],["Belarus",""],["Bihar",""],["Bolivia",""],["Brazil",""],["Burkina Faso",""],["Cambodia",""],["Canada","கனடா"],["Chandigarh",""],["Chhattisgarh",""],["Chile",""],["China",""],["Colombia",""],["Cuba",""],["Dadra & Nagar Haveli and Daman & Diu",""],["Delhi",""],["Democratic Republic of the Congo",""],["Denmark",""],["Dominican Republic",""],["Ecuador",""],["Egypt",""],["Ethiopia",""],["Fiji",""],["France",""],["Germany",""],["Ghana",""],["Goa",""],["Guinea",""],["Gujarat",""],["Haryana",""],["Himachal Pradesh",""],["Hong Kong",""],["Hungary",""],["Indonesia",""],["Iran",""],["Iraq",""],["Ireland",""],["Italy",""],["Ivory Coast",""],["Jammu & Kashmir",""],["Japan",""],["Jharkhand",""],["Karnataka","கர்நாடகா"],["Kazakhstan",""],["Kenya",""],["Kerala","கேரளா"],["Kuwait",""],["Ladakh",""],["Lebanon",""],["Liberia",""],["Madhya Pradesh",""],["Maharashtra",""],["Malaysia","மலேசியா"],["Mali",""],["Manipur",""],["Mauritius",""],["Meghalaya",""],["Mexico",""],["Mizoram",""],["Morocco",""],["Myanmar",""],["Nagaland",""],["Nepal",""],["New Zealand",""],["Nigeria",""],["North Korea",""],["Norway",""],["Odisha",""],["Oman",""],["Pakistan",""],["Peru",""],["Philippines",""],["Poland",""],["Puducherry","புதுச்சேரி"],["Punjab",""],["Qatar",""],["Rajasthan",""],["Republic of the Congo",""],["Reunion",""],["Romania",""],["Russia",""],["Saudi Arabia",""],["Senegal",""],["Sikkim",""],["Singapore","சிங்கப்பூர்"],["Somalia",""],["South Africa",""],["South Korea",""],["Spain",""],["Sri Lanka","இலங்கை"],["Sudan",""],["Sweden",""],["Switzerland",""],["Syria",""],["Taiwan",""],["Tamil Nadu","தமிழ்நாடு"],["Tanzania",""],["Telangana","தெலங்கானா"],["Thailand",""],["The Netherlands",""],["Togo",""],["Tripura",""],["Turkey",""],["Uganda",""],["Ukraine",""],["United Arab Emirates","ஐக்கிய அரபு அமீரகம்"],["United Kingdom","ஐக்கிய இராச்சியம்"],["United States","அமெரிக்கா"],["Uttar Pradesh",""],["Uttarakhand",""],["Uzbekistan",""],["Venezuela",""],["Vietnam",""],["West Bengal",""],["Yemen",""],["Zambia",""],["Zimbabwe",""]];
@@ -1277,7 +1288,7 @@ function splitBi(root){
     const a=document.createElement('span'); a.className='lt'; a.textContent=parts.slice(0,k).join(' · ');
     const s=document.createElement('span'); s.className='sep'; s.textContent=' · ';
     const b=document.createElement('span'); b.className='le'; b.textContent=parts.slice(k).join(' · ');
-    const f=document.createDocumentFragment(); f.append(a,s,b); n.replaceWith(f);
+    const w=document.createElement('span'); w.className='bil'; w.append(a,s,b); n.replaceWith(w);   // one wrapper keeps flex layouts intact
   }
 }
 /* <option> cannot hold spans: keep the bilingual text and show the chosen half */
@@ -1921,7 +1932,7 @@ function renderPor(){
         '<div class="pi-calc">'+x.calc+'</div><div class="pi-why">'+tx('<b>பொருள்:</b> '+I.whyTa,'<b>What it signifies:</b> '+I.why)+'</div><div class="pi-rule">'+tx('<b>விதி:</b> '+I.ruleTa,'<b>Rule:</b> '+I.rule)+'</div></div>'; }).join('')+'</div>'+
     chartChecksHTML(SIDES.b.chart,SIDES.g.chart)+
     '<p class="note">'+tx('விதிகள் பொதுவான தமிழ் மரபைப் பின்பற்றுகின்றன; பஞ்சாங்கங்கள் சில இடங்களில் (குறிப்பாக கணம், ஸ்திரீ தீர்க்கம், ராசி) வேறுபடும். முடிவெடுக்கும் முன் குடும்பங்கள் முழு ஜாதகங்களையும் ஒப்பிடுவது வழக்கம்.','Rules follow common Tamil practice; almanacs differ in places (especially Ganam, Stree Deergham and Rasi). Families usually also compare the full horoscopes before deciding.')+'</p>';
-  $('porPdf').addEventListener('click',()=>printReport('porOut','நட்சத்திரப் பொருத்தம் · Porutham','Porutham - '+NAK_EN[POR.b.nak]+' '+(POR.b.pada+1)+' and '+NAK_EN[POR.g.nak]+' '+(POR.g.pada+1)));
+  $('porPdf').addEventListener('click',()=>printReport('porOut',bi('நட்சத்திரப் பொருத்தம்','Nakshatra Porutham'),'Porutham - '+NAK_EN[POR.b.nak]+' '+(POR.b.pada+1)+' and '+NAK_EN[POR.g.nak]+' '+(POR.g.pada+1)));
   renderBest();
 }
 function renderBest(){
@@ -2107,7 +2118,8 @@ function renderAnalysis(ctx){
 /* ===== PDF via the browser's print dialog (keeps Tamil text sharp and selectable) ===== */
 function printReport(srcId,title,fname,invocation){
   const pa=$('printArea');
-  pa.innerHTML=(invocation?'<div class="ph-inv">'+invocation+'</div>':'')+'<div class="ph"><div class="ph-brand">Skandha’s Astro</div><div class="ph-t">'+title+'</div><div class="ph-d">Generated '+new Date().toLocaleString(undefined,{day:'numeric',month:'short',year:'numeric',hour:'numeric',minute:'2-digit'})+'</div></div>'+$(srcId).innerHTML;
+  const nd=new Date(), gen=tx('உருவாக்கிய நாள்: '+nd.getDate()+' '+MON_FULL_TA[nd.getMonth()]+' '+nd.getFullYear(),'Generated '+nd.toLocaleString(undefined,{day:'numeric',month:'short',year:'numeric',hour:'numeric',minute:'2-digit'}));
+  pa.innerHTML='<div class="ph-inv"><div class="ph-logo">'+LOGO_GANAPATHI+'</div>'+(invocation||'')+'</div>'+'<div class="ph"><div class="ph-brand">'+tx('ஸ்கந்தாஸ் ஆஸ்ட்ரோ','Skandha’s Astro')+'</div><div class="ph-t">'+title+'</div><div class="ph-d">'+gen+'</div></div>'+$(srcId).innerHTML;
   pa.querySelectorAll('.pdfrow,.labtoggle,button.btn').forEach(e=>e.remove());
   const old=document.title; document.title=fname.replace(/[\\/:*?"<>|]+/g,' ');
   document.body.classList.add('printing');
@@ -2475,7 +2487,7 @@ function renderHoro(){
 function printHoroscope(f){
   const pa=$('printArea'), nowD=new Date(), tzL=-nowD.getTimezoneOffset()/60;
   const gen=HL==='ta' ? 'உருவாக்கிய நாள்: '+dateL(nowD,tzL)+', '+timeL(nowD,tzL) : 'Generated '+dateL(nowD,tzL)+', '+timeL(nowD,tzL);
-  pa.innerHTML='<div class="ph-inv"><div class="inv-ta">'+Lx('ஓம் நமோ வேங்கடேசாய','Om Namo Venkatesaaya')+'</div></div>'+
+  pa.innerHTML='<div class="ph-inv"><div class="ph-logo">'+LOGO_NAMAM+'</div><div class="inv-ta">'+Lx('ஓம் நமோ வேங்கடேசாய','Om Namo Venkatesaaya')+'</div></div>'+
     '<div class="ph"><div class="ph-brand">'+Lx('ஸ்கந்தாஸ் ஆஸ்ட்ரோ','Skandha’s Astro')+'</div><div class="ph-t">'+Lx('ஜாதகம்','Horoscope')+'</div><div class="ph-d">'+gen+'</div></div>'+$('horoOut').innerHTML;
   pa.querySelectorAll('.pdfrow,.labtoggle,button.btn').forEach(e=>e.remove());
   const fname=Lx('ஜாதகம்','Horoscope')+(f.name?' - '+f.name:'')+' - '+f.date+(HL==='ta'?' - Tamil':' - English');
