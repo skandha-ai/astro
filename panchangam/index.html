@@ -307,7 +307,7 @@ h1{font-family:Georgia,"Times New Roman",serif;letter-spacing:.01em}
 .bestbtn span{display:block;font-size:14px;color:var(--muted)}
 .bestbtn:hover{border-color:var(--turmeric);background:var(--cellHover)}
 @media (max-width:1100px){ .homegrid{grid-template-columns:1fr} }
-@media (max-width:700px){ .tabs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px} .tab{font-size:14px;padding:8px 6px;border-radius:12px;line-height:1.3} .tabhead h2{font-size:22px} }
+@media (max-width:700px){ .tabs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px} .tab{font-size:14px;padding:8px 6px;border-radius:12px;line-height:1.3} .tabhead h2{font-size:22px} }
 @media (max-width:800px){ .porlist{grid-template-columns:1fr} .porin{grid-template-columns:1fr} .swap{justify-self:center} .porsum{flex-direction:column;align-items:flex-start;gap:8px} .ps-score{text-align:left} }
 
 
@@ -384,7 +384,7 @@ html[data-lang="both"] .ot,html[data-lang="both"] .xe{display:none!important}
 .pmode{display:flex;gap:6px;flex-wrap:wrap}
 .pmode label{flex-direction:row!important;align-items:center;cursor:pointer}
 .pmode input{position:absolute;opacity:0;pointer-events:none}
-.pmode span{display:block;padding:6px 12px;border-radius:999px;border:1px solid var(--line);background:var(--paper);color:var(--muted);font-size:15px}
+.pmode label>span{display:block;padding:6px 12px;border-radius:999px;border:1px solid var(--line);background:var(--paper);color:var(--muted);font-size:15px}
 .pmode input:checked+span{background:var(--maroon);border-color:var(--maroon);color:#fff}
 .pmode input:focus-visible+span{outline:3px solid var(--turmeric);outline-offset:2px}
 .pbox{display:flex;flex-direction:column;gap:10px}
@@ -399,6 +399,44 @@ html[data-lang="both"] .ot,html[data-lang="both"] .xe{display:none!important}
 .footgrid p{font-size:15px;line-height:1.6;margin:0}
 .footnav{display:flex;flex-wrap:wrap;gap:8px 18px;margin:16px 0 0;font-size:15px}
 .footnav a{color:var(--vermilion)}
+/* rasi palan */
+.rpform{display:flex;flex-wrap:wrap;gap:10px 18px;align-items:flex-end}
+.rpform>label,.rpsub>label{display:flex;flex-direction:column;gap:4px;font-size:15px;color:var(--muted);flex:1 1 260px;max-width:520px}
+.rpform select,.rpsub select{font:inherit;font-size:18px;padding:10px 12px;border-radius:10px;border:1px solid var(--line);background:var(--cell);color:var(--ink);width:100%;min-width:0}
+.rpform .linkbtn{margin-bottom:12px}
+.rpstars{margin-top:8px;color:var(--muted);font-size:15px}
+.rpmode{margin:16px 0 4px}
+.rpsub{display:flex;flex-wrap:wrap;gap:10px 18px;align-items:flex-end;margin-top:12px;padding-top:12px;border-top:1px dashed var(--line)}
+.rpsub[hidden]{display:none}
+.rp-ev{background:var(--cell);border:1px solid var(--line);border-radius:12px;padding:12px 16px;margin:0 0 14px;font-size:16px;line-height:1.5}
+.rp-evt{font-size:21px;font-weight:700;color:var(--maroon);margin-bottom:2px}
+.rp-steps{margin:8px 0 0;padding-left:22px}
+.rp-steps li{margin:3px 0}
+.rp-main{border:2px solid var(--turmeric);border-radius:14px;padding:12px 16px;margin:0 0 18px}
+.rp-mh{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:4px}
+.rp-mh .dp-r{font-size:22px}
+.rp-blk,.rp-sum{border:1px solid var(--line);border-left:5px solid var(--line);border-radius:10px;padding:10px 14px;margin:10px 0;background:var(--paper)}
+.rp-blk.g{border-left-color:var(--good)}.rp-blk.m{border-left-color:var(--mixed)}.rp-blk.b{border-left-color:var(--bad)}
+.rp-sum{border-left-color:var(--maroon);background:var(--cell)}
+.rp-h{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;font-weight:700;font-size:17px}
+.rp-h .chip{font-size:13px;white-space:nowrap;flex:none}
+.rp-blk p,.rp-sum p{margin:6px 0 0;font-size:16px;line-height:1.55}
+.rp-asp,.rp-when{color:var(--muted);font-size:15px!important}
+.rp-when{font-weight:600}
+.rp-sat{font-weight:600;color:var(--bad)}
+.rp-sub{margin:18px 0 4px;font-size:18px;color:var(--maroon)}
+.rp-pari{margin:14px 0 0;padding:10px 14px;border-radius:10px;background:var(--mixedBg);font-size:15px;line-height:1.5}
+.rp-pari ul{margin:6px 0 0;padding-left:20px}
+.rp-bg{margin:4px 0 0;padding-left:20px;font-size:15.5px;line-height:1.55}
+.rp-bg li{margin:4px 0}.rp-bg .chip{font-size:12px;padding:1px 8px}
+.rp-mgrid{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:6px;margin:8px 0}
+.rp-m{border-radius:8px;padding:6px 4px;text-align:center;font-size:14px;line-height:1.3;border:1px solid var(--line)}
+.rp-m b{display:block;font-size:15px}
+.rp-m.g{background:var(--goodBg);color:var(--good)}.rp-m.m{background:var(--mixedBg);color:var(--mixed)}.rp-m.b{background:var(--badBg);color:var(--bad)}
+.rp-oth{margin:6px 0 10px;font-size:20px;color:var(--maroon)}
+#rpOut .dp-t{padding-top:4px}
+@media (max-width:700px){ .rp-mgrid{grid-template-columns:repeat(3,minmax(0,1fr))} .rp-h{flex-direction:column;gap:4px} .rp-mh{flex-direction:column;align-items:flex-start} }
+@media print{ .rp-blk,.rp-sum,.rp-ev,.rp-pari,.rp-mgrid{break-inside:avoid} .rp-main{border:none;padding:0} }
 .footrow{display:flex;flex-wrap:wrap;gap:10px 18px;align-items:center;margin:16px 0 8px;font-size:14px}
 @media (max-width:800px){ .footgrid{grid-template-columns:1fr} }
 .fbd{border:1px solid var(--line);border-radius:16px;background:var(--paper);color:var(--ink);padding:20px;width:min(560px,calc(100vw - 32px));box-shadow:var(--shadow)}
@@ -487,6 +525,7 @@ html[data-lang="both"] .ot,html[data-lang="both"] .xe{display:none!important}
   </header>
   <nav class="tabs" role="tablist" aria-label="Sections">
     <button class="tab" role="tab" id="tb-home" type="button">ஜாதகம் · Home</button>
+    <button class="tab" role="tab" id="tb-palan" type="button">ராசி பலன் · Rasi Palan</button>
     <button class="tab" role="tab" id="tb-chakram" type="button">சகாதேவர் ஆரூடம் · Chakram</button>
     <button class="tab" role="tab" id="tb-por" type="button">பொருத்தம் · Porutham</button>
   </nav>
@@ -530,6 +569,33 @@ html[data-lang="both"] .ot,html[data-lang="both"] .xe{display:none!important}
         <div class="panel" style="margin-top:18px" id="horoOut"></div>
       </main>
     </div>
+  </div>
+
+  <div id="tab-palan" hidden>
+    <div class="tabhead"><h2>ராசி பலன் · Rasi Palan</h2><p><span class="ot">குரு பெயர்ச்சி, சனி பெயர்ச்சி, ராகு–கேது பெயர்ச்சி பலன்கள், ஆண்டு, மாத ராசி பலன்கள், உங்கள் ராசியிலிருந்து கணக்கிட்டு.</span><span class="oe">Guru, Sani and Rahu–Ketu peyarchi palan, with yearly and monthly rasi palan, counted from your Moon sign.</span></p></div>
+    <div class="panel">
+      <div class="rpform">
+        <label>உங்கள் ராசி · Your rasi<select id="rpRasi"></select></label>
+        <button class="linkbtn" id="rpHoro" type="button">என் ஜாதகத்திலிருந்து எடு · Use my horoscope</button>
+      </div>
+      <p class="pinfo rpstars" id="rpStars"></p>
+      <div class="pmode rpmode" role="radiogroup" aria-label="Reading">
+        <label><input type="radio" name="rpMode" value="pey" checked><span>பெயர்ச்சி பலன் · Peyarchi</span></label>
+        <label><input type="radio" name="rpMode" value="year"><span>ஆண்டு பலன் · Yearly</span></label>
+        <label><input type="radio" name="rpMode" value="month"><span>மாத பலன் · Monthly</span></label>
+      </div>
+      <div id="rpPeyBox" class="rpsub">
+        <div class="pmode" role="radiogroup" aria-label="Planet">
+          <label><input type="radio" name="rpPl" value="Jupiter" checked><span>குரு · Guru</span></label>
+          <label><input type="radio" name="rpPl" value="Saturn"><span>சனி · Sani</span></label>
+          <label><input type="radio" name="rpPl" value="Rahu"><span>ராகு–கேது · Rahu–Ketu</span></label>
+        </div>
+        <label>பெயர்ச்சி · Transit<select id="rpEv"></select></label>
+      </div>
+      <div id="rpYearBox" class="rpsub" hidden><label>ஆண்டு · Year<select id="rpYear"></select></label></div>
+      <div id="rpMonthBox" class="rpsub" hidden><label>மாதம் · Month<select id="rpMonth"></select></label></div>
+    </div>
+    <div class="panel" style="margin-top:14px" id="rpOut"></div>
   </div>
 
   <div id="tab-chakram" hidden>
@@ -668,6 +734,7 @@ html[data-lang="both"] .ot,html[data-lang="both"] .xe{display:none!important}
     <nav class="footnav" aria-label="பக்கங்கள் · Pages">
       <a href="/">ஜாதகம் · Horoscope</a>
       <a href="/panchangam/">இன்றைய பஞ்சாங்கம் · Today’s Panchangam</a>
+      <a href="/rasi-palan/">குரு, சனி, ராகு–கேது பெயர்ச்சி · Rasi Palan</a>
       <a href="/porutham/">திருமணப் பொருத்தம் · Marriage matching</a>
       <a href="/arudam/">சகாதேவர் ஆரூடம் · Sahadevar Arudam</a>
     </nav>
@@ -1655,14 +1722,15 @@ function readHoroForm(){ return {name:$('hName').value.trim(), date:HDATE.get(),
 
 /* ===== Tabs and wiring ===== */
 function showTab(id,quiet){
-  if(!['home','chakram','por'].includes(id)) id='home';
-  for(const t of ['home','chakram','por']){ $('tab-'+t).hidden=(t!==id); $('tb-'+t).setAttribute('aria-selected',t===id?'true':'false'); }
+  if(!['home','palan','chakram','por'].includes(id)) id='home';
+  for(const t of ['home','palan','chakram','por']){ $('tab-'+t).hidden=(t!==id); $('tb-'+t).setAttribute('aria-selected',t===id?'true':'false'); }
   store.set('sc_tab2',id);
   if(id==='home'){ renderPanch(); renderHoro(); }
   if(id==='por') renderPor();
+  if(id==='palan') renderPalan();
   if(!quiet) window.scrollTo({top:0,behavior:'smooth'});
 }
-for(const t of ['home','chakram','por']) $('tb-'+t).addEventListener('click',()=>showTab(t));
+for(const t of ['home','palan','chakram','por']) $('tb-'+t).addEventListener('click',()=>showTab(t));
 
 /* panchangam controls */
 const PPICK=makePlacePicker('p',PLACE,sel=>{ if(sel.custom&&!(isFinite(parseFloat(sel.lat))&&isFinite(parseFloat(sel.lon)))) return; PLACE=sel; store.set('sc_place2',PLACE); renderPanch(); renderToday(); });
@@ -2175,7 +2243,8 @@ function renderDina(P,pl,d){
   box.innerHTML='<div class="tabhead start" style="margin-bottom:8px"><h2>தின பலன் · Daily palan</h2><p>'+tx(d.ta+' · சந்திரன் '+RASI_TA[P.sA]+' ராசியில்'+(change?' '+timeTa(change,pl.tz)+' வரை, பிறகு '+RASI_TA[P.sB]+' ராசியில்':'')+'. நாளின் பெரும்பகுதியில் சந்திரன் இருக்கும் ராசியின்படி ('+RASI_TA[s1]+') பலன். ஒரு ராசியைத் தொட்டுப் படிக்கவும்.',
       d.en+' · Moon in '+RASI_EN[P.sA]+(change?' until '+fmtTime(change,pl.tz)+', then '+RASI_EN[P.sB]:'')+'. Readings follow the Moon’s sign for most of the day ('+RASI_EN[s1]+'). Tap a rasi to read.')+'</p></div>'+
     order.map(row).join('')+
-    '<p class="note">'+tx('ஒவ்வொரு ராசியிலிருந்தும் சந்திரனின் தினசரி சஞ்சாரத்தின் அடிப்படையில் (கோசாரம்). உங்கள் நாள் உங்கள் தசை, பிற கிரக சஞ்சாரங்களையும் சார்ந்தது.','Based on the Moon’s daily transit counted from each Moon sign (classical gochara). Your own day also depends on your dasha and other transits.')+'</p>';
+    '<p class="note">'+tx('ஒவ்வொரு ராசியிலிருந்தும் சந்திரனின் தினசரி சஞ்சாரத்தின் அடிப்படையில் (கோசாரம்). உங்கள் நாள் உங்கள் தசை, பிற கிரக சஞ்சாரங்களையும் சார்ந்தது.','Based on the Moon’s daily transit counted from each Moon sign (classical gochara). Your own day also depends on your dasha and other transits.')+'</p>'+
+    '<p class="note"><button class="linkbtn" type="button" onclick="showTab(\'palan\')">'+tx('குரு, சனி, ராகு–கேது பெயர்ச்சி, ஆண்டு, மாத பலன்கள் →','Guru, Sani and Rahu–Ketu peyarchi, yearly and monthly palan →')+'</button></p>';
 }
 
 /* ===== மாந்தி · Maandhi and குளிகன் · Gulika (upagrahas) =====
@@ -2670,6 +2739,446 @@ function renderBala(ctx){
   box.innerHTML=html;
 }
 
+/* ===== ராசி பலன் · Rasi palan: Guru, Sani and Rahu–Ketu peyarchi, yearly and monthly readings.
+   Classical gochara: each planet's house is counted from the Moon sign (rasi), as in Tamil panchangams.
+   Dates are by Thirukanitha (Lahiri ayanamsa, mean node), the same as the rest of the site. ===== */
+
+const PH_TA=['உடல், சுயம்','குடும்பம், பணம், பேச்சு','தைரியம், உடன்பிறப்பு, முயற்சி','தாய், வீடு, வாகனம், மன அமைதி','பிள்ளைகள், அறிவு, பூர்வபுண்ணியம்','கடன், நோய், போட்டி','வாழ்க்கைத் துணை, கூட்டாளி','ஆயுள், திடீர் நிகழ்வுகள்','தந்தை, பாக்கியம், தொலைதூரப் பயணம்','தொழில், பதவி, கௌரவம்','லாபம், நண்பர்கள்','செலவு, வெளிநாடு, ஆன்மிகம்'];
+const PH_EN=['self and health','family, money and speech','courage, siblings and effort','mother, home, vehicles and peace of mind','children, intellect and past merit','debts, illness and competition','spouse and partners','longevity and sudden events','father, fortune and long journeys','career, status and honour','gains and friends','expenses, foreign lands and spirituality'];
+
+/* slow planets: [rating, name Ta, name En, reading Ta, reading En] for houses 1..12 from the Moon sign */
+const PG={
+Jupiter:[
+ ['m','ஜென்ம குரு','Janma Guru','இடமாற்றம், பொறுப்பு மாற்றம், எதிர்பாராத செலவுகள், மன அலைச்சல் வரக்கூடிய சோதனைக் காலமாக மரபு கருதுகிறது; உடல்நலம், எடையில் கவனம் தேவை. பெரிய அபாயங்களை விட கற்றலுக்கும் திட்டமிடலுக்கும் ஏற்ற காலம்.','Tradition counts this as a testing position: a change of place or role, unplanned expenses and a restless mind are possible, and health and weight need watching. A time to learn and plan rather than to take large risks.'],
+ ['g','தன குரு','Dhana Guru','பணம், குடும்பம், வாக்கு ஆகியவற்றுக்கு நல்ல நிலை. வருமானம் உயரும், சேமிப்பு கூடும்; திருமணம், குழந்தைப் பிறப்பு போன்ற குடும்ப சுபநிகழ்ச்சிகளுக்கு வாய்ப்பு. சொல்லுக்கு மதிப்பு கூடும்; கல்வி, பேச்சுத் தொடர்பான பணிகள், குடும்பப் பிரச்சினைகளைத் தீர்ப்பதற்கு ஏற்ற காலம்.','A favourable position for money, family and speech. Income improves, savings become possible, and family events such as weddings or births are likely. Your words carry weight; a good time for studies, work that uses speech, and settling family matters.'],
+ ['b','','','முயற்சிக்கேற்ற பலன் குறைவாகக் கிடைக்கும். திட்டங்கள் தள்ளிப்போகலாம், விரும்பாத இடமாற்றம் அல்லது வேலை மாற்றம் வரலாம்; உடன்பிறப்புகள், அண்டை வீட்டாருடன் பொறுமை தேவை. கடன் கொடுப்பது, ஜாமீன் கையெழுத்திடுவதைத் தவிர்க்கவும்; நிதானமான உழைப்பு நிலையைக் காக்கும்.','Effort brings less than it should. Plans may stall, a change of job or home can be forced rather than chosen, and siblings or neighbours need patience. Avoid lending money and standing guarantee; steady work holds its ground.'],
+ ['b','','','வீட்டில் அமைதி குறையலாம், தாயின் உடல்நலத்தில் கவனம் தேவை. வீடு, நிலம், வாகனம் தொடர்பான விஷயங்களில் செலவு அல்லது தாமதம்; நன்கு சரிபார்த்தபின் வாங்கவும். பணி காரணமாக அலைச்சல் இருக்கலாம். குடும்ப விவாதங்களில் நிதானம் காக்கவும்.','Peace at home can be disturbed and mother’s health may need attention. Property and vehicle matters bring expense or delay; buy only after careful checks. Work may mean travel away from home. Keep calm in family discussions.'],
+ ['g','','','மிகச் சிறந்த நிலைகளில் ஒன்று. பிள்ளைகளால் நல்ல செய்தி, படிப்பு, தேர்வுகளில் வெற்றி, தெளிவான சிந்தனை, சரியான முடிவுகள். குழந்தைப் பேறு உட்பட நீண்ட நாள் விருப்பங்கள் நிறைவேறும்; பெரியோர் ஆசியும் அங்கீகாரமும் எளிதில் கிடைக்கும். வழிபாடு, மந்திரம், படைப்புப் பணிகளுக்கு ஏற்ற காலம்.','One of the best positions. Good news about children, success in studies and examinations, clear thinking and sound decisions. Long-awaited wishes, including childbirth, can be fulfilled, and recognition and the blessings of elders come easily. A good time for prayer, mantra and creative work.'],
+ ['b','','','உடல்நலம், கடன், சர்ச்சைகளில் கவனம். கடன் எளிதில் கிடைக்கும், ஆனால் திருப்பிச் செலுத்துவது கடினம்; உண்மையான தேவைக்கு மட்டும் வாங்கவும். பணியிடத்தில் போட்டியாளர்கள் தீவிரமாக இருக்கலாம்; ஆவணங்களைச் சரியாக வைத்து, முடிந்தவரை வழக்குகளைத் தவிர்க்கவும். உணவு, உறக்கத்தில் ஒழுங்கு உங்களைக் காக்கும்.','Watch health, debts and disputes. Loans become easy to take but hard to repay, so borrow only for real needs. Rivals at work may be active; keep good records and avoid litigation where you can. Regular food and sleep protect you.'],
+ ['g','','','திருமணம், கூட்டுத் தொழில், பொது உறவுகளுக்குச் சாதகம். திருமணமாகாதவர்களுக்குத் திருமணப் பேச்சு கைகூடும், வாழ்க்கைத் துணையின் ஆதரவு கிடைக்கும்; கூட்டுத் தொழில், ஒப்பந்தங்கள் லாபம் தரும். பயணங்கள் இனிமையாக அமையும், சமூக மதிப்பு உயரும்.','Favourable for marriage, partnerships and public dealings. Marriage talks move forward for the unmarried, the spouse is supportive, and partnerships and contracts bring gain. Travel is pleasant and social standing improves.'],
+ ['b','அஷ்டம குரு','Ashtama Guru','கவனமாகச் செயல்பட வேண்டிய காலம். எதிர்பாராத செலவுகள், பணியில் தாமதம், உடல்நலம் அல்லது கௌரவம் பற்றிய கவலைகள் வரலாம். ஊக வணிகம், தேவையற்ற அபாயங்களைத் தவிர்க்கவும்; வாக்குறுதிகளை அளவோடு வைக்கவும். பரம்பரைச் சொத்து, காப்பீடு, ஆராய்ச்சி தொடர்பானவை நன்றாக அமையலாம்; வழிபாடு மன உறுதி தரும்.','A period to move carefully. Unexpected expenses, delays at work and worries about health or reputation can arise. Avoid speculation and needless risks, and keep promises modest. Inheritance, insurance or research may still go well, and prayer brings steadiness.'],
+ ['g','பாக்கிய குரு','Bhagya Guru','அதிர்ஷ்டம் துணை நிற்கும். தந்தை, குரு, பெரியோரின் உதவி கிடைக்கும்; தீர்த்த யாத்திரை, தொலைதூரப் பயணங்கள் பலன் தரும், தடைப்பட்ட காரியங்கள் நகரத் தொடங்கும். உயர்கல்வி, தானதர்மம், அர்த்தமுள்ள புதிய முயற்சிகளுக்கு நல்லது.','Fortune supports you. Father, teachers and elders help, pilgrimages and long journeys are fruitful, and stalled matters start to move. Good for higher studies, charity and starting meaningful work.'],
+ ['m','','','தொழிலில் மாற்றங்கள். பொறுப்புகள் கூடும், இடமாற்றம் அல்லது பதவி மாற்றம் வரலாம்; கடின உழைப்புக்குப் பின்னரே பலன். மேலதிகாரிகளுடன் மோதலைத் தவிர்த்து, வேலை மாற்ற முடிவுகளை நன்கு யோசித்து எடுக்கவும்; நேர்மையாகச் செயல்பட்டால் கௌரவம் காக்கப்படும்.','Changes at work. Responsibilities grow, a transfer or change of role is possible, and results come only after hard work. Avoid ego clashes with superiors and think career moves through; your reputation stays safe if you act honestly.'],
+ ['g','லாப குரு','Labha Guru','லாபத்துக்கு மிகச் சிறந்த நிலை. பல வழிகளில் வருமானம் உயரும், விருப்பங்கள் நிறைவேறும்; நண்பர்கள், மூத்த உடன்பிறப்புகள் உதவுவர், கவனமாகச் செய்த முதலீடுகள் பலன் தரும். பதவி உயர்வு, புதிய தொடர்புகள், வீட்டில் சுபநிகழ்ச்சிகளுக்கு நல்லது.','The best position for gains. Income rises from several directions, wishes are fulfilled, friends and elder siblings help, and careful investments pay off. Good for promotions, new contacts and auspicious events at home.'],
+ ['b','விரய குரு','Viraya Guru','செலவுகள் கூடும், அவற்றில் சில பயணம், கல்வி, வீடு, ஆன்மிகம் போன்ற நல்ல காரியங்களுக்காக இருக்கும். உறக்கம், மன அமைதியில் கவனம்; பணத்தைத் தாராளமாகக் கடன் கொடுக்க வேண்டாம். தர்மம், தீர்த்த யாத்திரைக்குச் செலவிடுவது இந்தக் காலத்தை நன்மையாக்கும்; வெளிநாட்டுப் பயணம் அல்லது வேலைக்கு வாய்ப்பு.','Expenses rise, some of them for good causes such as travel, education, a home or religious work. Sleep and peace of mind need care, and money should not be lent freely. Spending on charity and pilgrimage turns this period to good use; travel or work abroad is possible.']
+],
+Saturn:[
+ ['b','ஜென்மச் சனி','Janma Sani','ஏழரைச் சனியின் நடுப்பகுதி, மிகவும் அழுத்தமான காலம். சோர்வு, பணிச்சுமை, தாமதங்கள், அதிகப் பொறுப்பு என்ற உணர்வு வரலாம். மூட்டு, நரம்பு, செரிமானம் உள்ளிட்ட உடல்நலத்தில் தொடர் கவனம் தேவை. பெரிய முயற்சிகளையும் புதிய கடன்களையும் தவிர்க்கவும்; பொறுமை, ஒழுக்கம், பிறருக்குச் செய்யும் சேவை பின்னால் நல்ல பலன் தரும்.','The middle phase of Ezharai Sani (Sade Sati), and the heaviest. Fatigue, pressure at work, delays and a feeling of carrying too much are possible. Joints, nerves and digestion need regular care. Avoid big ventures and new loans; patience, discipline and service to others are rewarded later.'],
+ ['b','பாதச் சனி','Paadha Sani','ஏழரைச் சனியின் கடைசிப் பகுதி. பணம், குடும்ப விஷயங்களில் கவனம்: செலவுகள், வீட்டில் கடுஞ்சொற்கள், சேமிப்பில் அழுத்தம் வரலாம். பேச்சில் நிதானம், வரவுசெலவுத் திட்டம் அவசியம்; ஜாமீன் கையெழுத்து வேண்டாம். இந்தப் பகுதி முடியும்போது சுமை குறையும்.','The last phase of Ezharai Sani. Money and family need care: expenses, harsh words at home and pressure on savings are possible. Guard your speech, keep a budget and do not stand guarantee. The load lifts as this phase ends.'],
+ ['g','','','சனிக்கு மிகச் சிறந்த நிலைகளில் ஒன்று. தைரியமும் விடாமுயற்சியும் பலன் தரும்; தடைகள் விலகும், எதிரிகள் அடங்குவர், புதிய வருமான வழிகள் திறக்கும். வேலை, சொத்து, நீண்ட உழைப்பு தேவைப்படும் புதிய முயற்சிகளுக்கு நல்லது.','One of Saturn’s best positions. Courage and persistence pay off, obstacles clear, rivals give way and new sources of income open. Good for jobs, property and anything that needs sustained effort.'],
+ ['b','அர்த்தாஷ்டமச் சனி','Ardhashtama Sani','வீட்டில் அமைதி, தாயின் உடல்நலத்தில் கவனம் தேவை; வீடு, வாகனம், குடியிருப்பு தொடர்பாகச் சிக்கல் அல்லது இடமாற்றம் வரலாம். பணி காரணமாக வீட்டை விட்டுப் பிரிய நேரலாம். வாகனத்தைக் கவனமாக ஓட்டவும், அவசரமாகச் சொத்து வாங்க வேண்டாம்.','Peace at home and mother’s health need attention; trouble with property, vehicles or the residence, or a move, is possible. Work may keep you away from home. Drive carefully and do not buy property in a hurry.'],
+ ['m','','','பிள்ளைகள், படிப்பு, முதலீடுகள் பற்றிய கவலைகள் வரலாம், மனம் கனமாக உணரலாம். ஊக வணிகம், யாரோ சொன்னதற்காகப் பங்குகள் வாங்குவதைத் தவிர்க்கவும். பொறுமையான, ஒழுங்கான படிப்பு பலன் தரும்; பிள்ளைகளின் தேவைகளில் அக்கறை காட்டவும்.','Worries about children, studies or investments can arise and the mind may feel heavy. Avoid speculation and shares bought on tips. Patient, structured study works; give children’s concerns real attention.'],
+ ['g','','','வலிமையான நிலை. கடன்கள் குறையும், உடல்நலம் மேம்படும், எதிரிகள் தோற்பர், நிலுவையிலுள்ள சர்ச்சைகள் உங்களுக்குச் சாதகமாகத் தீரும். பணி, போட்டித் தேர்வுகள், பழைய பிரச்சினைகளை முடிப்பதற்கு நல்லது.','A strong position. Debts reduce, health improves, rivals are defeated and pending disputes settle in your favour. Good for service jobs, competitive exams and clearing old problems.'],
+ ['b','கண்டகச் சனி','Kandaka Sani','வாழ்க்கைத் துணை, கூட்டாளிகளுடன் பொறுமை தேவை; மனவேறுபாடு, குடும்பத்தைப் பிரிந்து பயணம், திருமணப் பேச்சில் தாமதம் வரலாம். ஒப்பந்தங்களை நன்கு படித்துக் கையெழுத்திடவும், நன்கு சோதிக்காத கூட்டுத் தொழில் வேண்டாம். துணையின் உடல்நலத்தில் கவனம்.','Relations with spouse and partners need patience; misunderstandings, travel away from family or delays in marriage talks are possible. Read contracts carefully and avoid untested partnerships. Look after your spouse’s health.'],
+ ['b','அஷ்டமச் சனி','Ashtama Sani','ஜென்மச் சனிக்கு அடுத்தபடியாக மிகவும் சோதனையான நிலையாக மரபு கருதுகிறது. தாமதங்கள், எதிர்பாராத தடைகள், உடல்நலக் கவலைகள், பிறர் தவறுக்குப் பழி சுமத்தல் போன்றவை வரலாம். அபாயமான முயற்சிகள், ஊக வணிகம், இரவுப் பயணம், புதிய கடன்களைத் தவிர்க்கவும்; வழக்கமான பணியிலும் நேர்மையான நடவடிக்கைகளிலும் உறுதியாக இருங்கள். தொடர் வழிபாடும் சேவையும் சுமையைக் குறைக்கும்.','Tradition counts this as the most testing Saturn position after Janma Sani. Delays, unexpected obstacles, health worries and blame for others’ mistakes are possible. Avoid risky ventures, speculation, night travel and new loans; hold to routine work and honest dealings. Regular prayer and service lighten the load.'],
+ ['m','','','அதிர்ஷ்டம் மெதுவாக வேலை செய்வதுபோல் தோன்றும்; தந்தையின் உடல்நலம், பெரியோருடனான உறவில் கவனம் தேவை. தொலைதூரப் பயணங்கள் இன்பத்தைவிட உழைப்பையே தரும். கடமையுணர்வுடன் செய்யும் பணி, முதியோருக்குச் செய்யும் உதவி பலன் தரும்; குறுக்கு வழிகள் வேண்டாம்.','Luck seems to move slowly, and father’s health or relations with elders need care. Long journeys bring effort more than pleasure. Dutiful work and help to the elderly bring results; avoid shortcuts.'],
+ ['m','கர்மச் சனி','Karma Sani','பணிச்சுமையும் எதிர்பார்ப்புகளும் கூடும். ஒழுக்கமான, நிலையான உழைப்பால் பலன் கிடைக்கும்; வேலை மாற்றம் வரலாம், ஆனால் அது திட்டமிட்டதாக இருக்கட்டும், திடீர் முடிவாக அல்ல. அதிகாரத்தில் உள்ளவர்களுடன் மோதலைத் தவிர்க்கவும்.','Heavy workload and high expectations at work. Results come through steady, disciplined effort; a change of job is possible but should be planned, not sudden. Avoid confrontations with people in authority.'],
+ ['g','லாபச் சனி','Labha Sani','சனிக்கு மிகுந்த பலன் தரும் நிலை. வருமானமும் சேமிப்பும் பெருகும், நீண்ட நாள் விருப்பங்கள் நிறைவேறும், பதவி உயர்வு, சொத்துச் சேர்க்கைக்கு வாய்ப்பு; நல்ல நிலையில் உள்ள நண்பர்கள் உதவுவர். நீடித்து நிற்பவற்றில் முதலீடு செய்யுங்கள்.','Saturn’s most rewarding position. Income and savings grow, long-pending wishes come through, promotions and property gains are likely, and well-placed friends help. Invest in what lasts.'],
+ ['b','விரயச் சனி','Viraya Sani','ஏழரைச் சனியின் முதல் பகுதி. செலவுகள் கூடும், உறக்கம் குறையலாம், பயணம் அல்லது இடமாற்றம் வரலாம். செலவுகளைத் திட்டமிட்டு, கடன் கொடுப்பதைத் தவிர்க்கவும்; கண், கால் நலனில் கவனம். ஆன்மிகப் பயிற்சிக்கும் சேவைக்கும் ஏற்ற காலம்.','The first phase of Ezharai Sani. Expenses rise, sleep may suffer, and travel or relocation is possible. Plan spending, avoid lending, and look after your eyes and feet. A good time for spiritual practice and service.']
+],
+Rahu:[
+ ['b','ஜென்ம ராகு','Janma Rahu','மன அமைதியின்மை, குழப்பம், அவசர முடிவுகள் வரலாம்; உடல்நலம், உணவில் கவனம். குறுக்கு வழிகளையும் விரைவாகப் பணம் தருவதாகச் சொல்பவர்களையும் தவிர்க்கவும். கவனமாகச் செய்தால் புதிய தொழில்நுட்பம் கற்கவும் வெளிநாட்டுத் தொடர்புடைய பணிகளுக்கும் நல்ல காலம்.','Restlessness, confusion and impulsive decisions are possible; watch health and diet. Avoid shortcuts and anyone promising quick money. Done carefully, a good time to learn new technology or work with foreign connections.'],
+ ['b','','','பணம் வந்து போகும்; பேச்சால் குடும்பத்தில் மனவேறுபாடு வரலாம். ஆவணங்கள், கணக்குகளைச் சரிபார்க்கவும்; கடுஞ்சொற்கள், ஆரோக்கியமற்ற உணவு, பழக்கங்களைத் தவிர்க்கவும்.','Money comes and goes, and careless words can upset the family. Check documents and accounts; avoid harsh words and unhealthy food or habits.'],
+ ['g','','','துணிச்சலும் முன்முயற்சியும் வெற்றி தரும். குறுகிய பயணம், ஊடகம், விற்பனை, தொழில்நுட்பம், புதிய முயற்சிகள் நன்றாக அமையும்; எதிரிகள் விலகுவர். கணக்கிட்ட அபாயங்களை எடுக்க நல்ல காலம்.','Boldness and initiative succeed. Short travel, media, sales, technology and new ventures go well, and rivals retreat. A good time for calculated risks.'],
+ ['b','','','வீட்டில் அமைதியின்மை, தாய், சொத்து, வாகனம் பற்றிய கவலைகள்; குடியிருப்பு மாற்றம் வரலாம். சொத்து ஆவணங்களை நன்கு சரிபார்த்து, வீட்டுச் சூழலை அமைதியாக வைக்கவும்.','Unrest at home and worries about mother, property or vehicles; a change of residence is possible. Check property papers carefully and keep the home calm.'],
+ ['b','','','முடிவுகளில் குழப்பம், பிள்ளைகள், படிப்பு பற்றிய கவலைகள்; ஊக வணிகம், சூதாட்டத்தால் இழப்பு வரலாம். முதலீடு செய்யும் முன் ஆலோசனை பெறவும், உறவுகளில் வெளிப்படைத்தன்மை தேவை.','Confused decisions and worries about children or studies; speculation and gambling can bring losses. Take advice before investing and keep relationships transparent.'],
+ ['g','','','எதிரிகளை வெல்லவும், கடன்களை அடைக்கவும், சர்ச்சைகளில் வெற்றி பெறவும் வலிமையான நிலை. ஒழுக்கத்தால் உடல்நலம் மேம்படும்; வேலை, போட்டிகள், அரசு அலுவலர்களுடனான விஷயங்களுக்கு நல்லது.','A strong position for defeating rivals, clearing debts and winning disputes. Health improves with discipline; good for jobs, competitions and dealings with officials.'],
+ ['b','','','வாழ்க்கைத் துணை, கூட்டாளிகளுடன் மனவேறுபாடு; வெளித்தோற்றம் ஒன்றாகவும் உள்ளே வேறாகவும் இருப்பவர்களிடம் கவனம். ஒப்பந்தங்களை நன்கு படிக்கவும், மறைமுக நடவடிக்கைகளைத் தவிர்த்து, உறவுக்கு நேரம் கொடுக்கவும்.','Misunderstandings with spouse or partners, and people who are not what they seem. Read agreements carefully, avoid secret dealings and give relationships time.'],
+ ['b','','','திடீர் நிகழ்வுகள், மறைந்த பிரச்சினைகள், ஆரம்பத்திலேயே கவனிக்க வேண்டிய உடல்நலக் குறைகள். அபாயமான பயணம், ஊக வணிகம், அதிகாரிகளுடன் வாக்குவாதத்தைத் தவிர்க்கவும்.','Sudden events, hidden problems and health issues that need early attention. Avoid risky travel, speculation and arguments with officials.'],
+ ['b','','','நம்பிக்கையில் சந்தேகம், தந்தை அல்லது குருவுடன் கருத்து வேறுபாடு, அவ்வப்போது மட்டும் கைகொடுக்கும் அதிர்ஷ்டம். வெளிநாட்டுப் பயணம், வழக்கத்துக்கு மாறான கல்விக்கு வாய்ப்பு; பெரியோரை மதித்து நடக்கவும்.','Doubts about faith, friction with father or teachers, and luck that comes in fits and starts. Foreign travel or unconventional learning is possible; respect your elders.'],
+ ['m','','','தொழிலில் லட்சியமும் திடீர் வாய்ப்புகளும், பெரும்பாலும் தொழில்நுட்பம், வெளிநாட்டுத் தொடர்பு, புதிய வழிகள் மூலம். வெற்றி கிடைக்கலாம், ஆனால் வழிமுறைகள் நேர்மையாக இருக்கட்டும்; மேலதிகாரிகளுடன் மோதல் வேண்டாம்.','Ambition and sudden career openings, often through technology, foreign links or unconventional paths. Success is possible, but keep your methods clean and avoid conflict with superiors.'],
+ ['g','','','எதிர்பாராத வழிகளில் லாபம், செல்வாக்குள்ள நண்பர்கள், வெளிநாட்டுத் தொடர்புகள், புதிய வட்டாரங்கள். விருப்பங்கள் நிறைவேறும்; தொழில் வளர்ச்சிக்கும் வருமானத்துக்கும் நல்லது.','Gains from unexpected sources, influential friends, foreign contacts and new networks. Wishes are fulfilled; good for business growth and income.'],
+ ['b','','','செலவுகள், உறக்கமின்மை, பயணங்கள்; வெளிநாட்டு வாசம் அல்லது வேலைக்கு வாய்ப்பு. மறைமுக எதிரிகள், வீண் செலவுகளிடம் கவனம்; தியானம் உதவும்.','Expenses, poor sleep and travel; settling or working abroad is possible. Beware of hidden enemies and wasteful spending; meditation helps.']
+],
+Ketu:[
+ ['b','ஜென்ம கேது','Janma Ketu','பற்றின்மை, சோர்வு, திசை பற்றிய குழப்பம்; சிறு உடல்நலக் குறைகளைக் கவனிக்கவும். ஆன்மிகப் பயிற்சிக்கு நல்ல காலம், பெரிய உலகியல் முயற்சிகளுக்குக் குறைவு.','Detachment, low energy and confusion about direction; attend to minor health problems. A good time for spiritual practice, less so for big worldly moves.'],
+ ['b','','','பேச்சு, குடும்ப விஷயங்களில் கவனம்; பணம் கையில் தங்காமல் போகலாம், உணவுப் பழக்கத்தில் கவனம். கணக்குகளை ஒழுங்காக வைக்கவும்.','Speech and family matters need care; money slips away and eating habits need watching. Keep accounts tidy.'],
+ ['g','','','தைரியம், விரைவான செயல், எதிரிகளை வெல்லுதல்; குறுகிய பயணம், திறன் வளர்ப்பு, ஆன்மிக ஒழுக்கத்துக்கு நல்லது.','Courage, quick action and success over rivals; good for short trips, building skills and spiritual discipline.'],
+ ['b','','','வீட்டில் அமைதியின்மை, தாய், சொத்து, வாகனம் பற்றிய கவலைகள்; மன அமைதிக்கு முயற்சி தேவை.','Restlessness at home and concerns about mother, property or vehicles; peace of mind takes effort.'],
+ ['b','','','பிள்ளைகள், படிப்பு பற்றிய கவலைகள், தடுமாறும் முடிவுகள். ஊக வணிகம் வேண்டாம்; மந்திர ஜபமும் நூல்கள் படிப்பதும் தெளிவு தரும்.','Worries about children and studies, and wavering decisions. Avoid speculation; mantra and reading scripture bring clarity.'],
+ ['g','','','எதிரிகள், நோய்களின் மீது வெற்றி; கடன்கள் குறையும், மறைந்திருந்த பிரச்சினைகள் வெளிப்பட்டுத் தீர்வு கிடைக்கும்.','Victory over rivals and illness; debts reduce and hidden problems come into the open where they can be solved.'],
+ ['b','','','திருமண வாழ்க்கை, கூட்டுறவில் இடைவெளி அல்லது ஈடுபாட்டுக் குறைவு; துணையின் உடல்நலத்தில் கவனம். வெளிப்படையாகப் பேசவும், அவசரக் கூட்டுறவுகள் வேண்டாம்.','Distance or coolness in marriage and partnerships; look after your spouse’s health. Talk openly and avoid hasty partnerships.'],
+ ['b','','','திடீர் பின்னடைவுகள், சிறு காயங்கள் அல்லது உடல்நலக் கவலைகள்; பயணம், நெருப்பு, இயந்திரங்களில் கவனம். ஆராய்ச்சி, ஆன்மிக நூல் படிப்பு, அமைதியான வழிபாட்டுக்கு நல்லது.','Sudden setbacks, minor injuries or health scares; take care with travel, fire and machines. Good for research, spiritual reading and quiet worship.'],
+ ['m','','','தீர்த்த யாத்திரை, ஆன்மிகக் குருமார்கள் மீது ஈடுபாடு; தந்தையுடனான உறவில் இடைவெளி வரலாம். லட்சியத்தைவிட தர்மத்தின் வழியே அதிர்ஷ்டம் கைகொடுக்கும்.','Interest in pilgrimage and spiritual teachers, though relations with father may cool. Luck works through dharma rather than ambition.'],
+ ['b','','','பணியில் அதிருப்தி அல்லது நிச்சயமின்மை; துறை மாற்றம் வரலாம். பெருமையை எதிர்பார்க்காமல் கடமையைச் செய்யவும், அவசரமாக வேலையை விட வேண்டாம்.','Dissatisfaction or uncertainty at work; a change of field is possible. Do your duty without seeking credit, and do not quit in a hurry.'],
+ ['g','','','லாபம், விருப்பங்கள் நிறைவேறுதல், நண்பர்களின் உதவி; ஆன்மிக, தர்ம காரியங்களில் வெற்றி.','Gains, wishes fulfilled and help from friends; success in spiritual and charitable work.'],
+ ['m','','','தீர்த்த யாத்திரை, தானத்துக்குச் செலவு, தியானம், மோட்சத்தில் ஈடுபாடு; உறக்கம் குறையலாம். தேவையற்றவற்றை விட்டுவிட நல்ல காலம்.','Spending on pilgrimage and charity, interest in meditation and liberation; sleep may be light. A good time to let go of what no longer serves you.']
+]};
+
+/* faster planets for the monthly view: [rating, Ta, En] */
+const PF={
+Sun:[['b','சோர்வு, உஷ்ணம் தொடர்பான உடல்நலக் குறைகள், கோபம்; தன்முனைப்பு மோதல்கள் வரலாம்.','Fatigue, heat-related ailments and a short temper; ego clashes are possible.'],
+ ['b','செலவுகள், கண் சோர்வு, குடும்பத்தில் கடுஞ்சொற்கள்.','Expenses, eye strain and harsh words in the family.'],
+ ['g','தன்னம்பிக்கை, எதிரிகளை வெல்லுதல், நல்ல உடல்நலம், முயற்சியால் லாபம்.','Confidence, success over rivals, good health and gains through effort.'],
+ ['b','வீட்டிலும் பயணத்திலும் அமைதியின்மை; மனம் சஞ்சலப்படலாம்.','Unrest at home and in travel; the mind may be uneasy.'],
+ ['b','பிள்ளைகள் பற்றிய கவலை, குழப்பம், சிறு உடல்நலக் குறைகள்.','Worries about children, confusion and minor ailments.'],
+ ['g','உடல்நலம் மேம்படும், எதிரிகள் அடங்குவர், கவலைகள் விலகும், பணி சிறக்கும்.','Health improves, rivals subside, worries clear and work goes well.'],
+ ['b','களைப்பான பயணம், துணை அல்லது கூட்டாளிகளுடன் உரசல், செரிமானக் கோளாறு.','Tiring travel, friction with spouse or partners, and digestive trouble.'],
+ ['b','பதற்றம், காய்ச்சல் போன்ற சிறு நோய்கள், அதிகாரத்தில் உள்ளவர்களுடன் உரசல்.','Anxiety, fevers or minor illness, and friction with people in authority.'],
+ ['b','தாமதங்கள், தந்தை அல்லது பெரியோருடன் கருத்து வேறுபாடு, சில சங்கடங்கள்.','Delays, disagreements with father or elders, and some awkward moments.'],
+ ['g','பணியில் வெற்றி, அங்கீகாரம், மேலதிகாரிகளின் ஆதரவு.','Success at work, recognition and support from superiors.'],
+ ['g','லாபம், பதவி உயர்வு, நல்ல உடல்நலம், கௌரவம்.','Gains, promotion, good health and honour.'],
+ ['b','செலவுகள், பயணம், சக்திக் குறைவு, நண்பர்களுடன் மனஸ்தாபம்.','Expenses, travel, low energy and friction with friends.']],
+Mars:[['b','கோபம், விபத்து, வெட்டு, தீக்காயம், ரத்த அழுத்தத்தில் கவனம்; நிதானம் தேவை.','Anger, accidents, cuts, burns and blood pressure need watching; slow down.'],
+ ['b','பணம், குடும்பம் தொடர்பான வாக்குவாதங்கள், செலவுகள்.','Quarrels over money or family, and expenses.'],
+ ['g','தைரியம், வெற்றி, சொத்து வழி லாபம், உடன்பிறப்புகளின் உதவி.','Courage, success, gains from property and help from siblings.'],
+ ['b','வீட்டில் உரசல், வாகனம் அல்லது சொத்தில் சிக்கல்; கவனமாக வாகனம் ஓட்டவும்.','Friction at home and trouble with vehicles or property; drive carefully.'],
+ ['b','பிள்ளைகள் பற்றிய கவலை, அவசர முடிவுகள், வயிற்றுக் கோளாறு.','Worries about children, hasty decisions and stomach trouble.'],
+ ['g','எதிரிகள் மீது வெற்றி, கடன் குறையும், உடல் வலிமை.','Victory over rivals, debts reduce and the body is strong.'],
+ ['b','துணை, கூட்டாளிகளுடன் வாக்குவாதம்; நேரடி மோதல் வேண்டாம்.','Arguments with spouse or partners; avoid confrontation.'],
+ ['b','காயம், காய்ச்சல், திடீர் இழப்புக்கு வாய்ப்பு; அபாயமான செயல்களைத் தவிர்க்கவும்.','Risk of injury, fever or sudden loss; avoid risky activities.'],
+ ['b','பெரியோருடன் உரசல், தாமதங்கள்; உடல் சோர்வு வரலாம்.','Friction with elders and delays; physical weakness is possible.'],
+ ['m','பணியில் கடின உழைப்பும் அழுத்தமும்; பலன் உண்டு, ஆனால் கோபம் கூடும்.','Hard work and pressure at work; results come, but tempers flare.'],
+ ['g','லாபம், சொத்துச் சேர்க்கை, வெற்றி, நல்ல உடல்நலம்.','Gains, property, success and good health.'],
+ ['b','செலவுகள், கண் அல்லது உறக்கக் கோளாறு, உரசல்கள்; கடன் கொடுக்க வேண்டாம்.','Expenses, eye or sleep trouble and friction; do not lend money.']],
+Venus:[['g','சுகம், மகிழ்ச்சி, வசீகரம், இணக்கம்.','Comfort, pleasure, charm and harmony.'],
+ ['g','பணவரவு, நல்ல உணவு, குடும்ப மகிழ்ச்சி, இனிய பேச்சு.','Money, good food, family happiness and sweet speech.'],
+ ['g','மதிப்பு, நண்பர்களின் உதவி, இனிய குறுகிய பயணங்கள்.','Respect, help from friends and pleasant short trips.'],
+ ['g','வீட்டில் சுகம், வாகனம் அல்லது வீட்டுப் பொருட்கள் வாங்குதல்.','Comfort at home; vehicles or household purchases.'],
+ ['g','காதல், பிள்ளைகளால் மகிழ்ச்சி, கலைத் துறையில் வெற்றி.','Romance, joy through children and success in the arts.'],
+ ['b','மனவேறுபாடுகள், சிறு உடல்நலக் குறைகள், பெண்கள் அல்லது கூட்டாளிகளுடன் சர்ச்சை.','Misunderstandings, minor illness and disputes with women or partners.'],
+ ['b','உறவுகளில் உரசல், சுகபோகங்களுக்குத் தவிர்க்கக்கூடிய செலவுகள்.','Friction in relationships and avoidable spending on pleasures.'],
+ ['g','எதிர்பாராத லாபம், சுகம், மாமனார் வீட்டார் உதவி.','Unexpected gains, comforts and help from in-laws.'],
+ ['g','அதிர்ஷ்டம், சமய நிகழ்ச்சிகள், புத்தாடை, ஆபரணச் சேர்க்கை.','Good fortune, religious events, new clothes or jewellery.'],
+ ['b','பணியிடத்தில் சர்ச்சை அல்லது அவமதிப்பு; பணியையும் தனிப்பட்ட விருப்பங்களையும் கலக்க வேண்டாம்.','Disputes or slights at work; keep pleasure and work apart.'],
+ ['g','லாபம், நட்பு, ஆடம்பரம், விருப்பங்கள் நிறைவேறுதல்.','Gains, friendship, luxury and wishes fulfilled.'],
+ ['g','சுகம், மகிழ்ச்சிக்கான செலவுகள், நல்ல உறக்கம், பயணம்.','Comforts, spending on enjoyment, good sleep and travel.']],
+Mercury:[['b','அவசரப் பேச்சு, தவறான ஆலோசனையால் இழப்பு; விவரங்களைச் சரிபார்க்கவும்.','Hasty words and losses through poor advice; check the details.'],
+ ['g','அறிவால் பணவரவு, நல்ல பேச்சு, கல்வி.','Money through intelligence, good speech and learning.'],
+ ['b','உடன்பிறப்பு, சக ஊழியர்களுடன் உரசல், வீண் அலைச்சல்.','Friction with siblings or colleagues and wasted running around.'],
+ ['g','வீட்டில் லாபம், உறவினர் ஆதரவு, கல்வியில் வெற்றி.','Gains at home, support from relatives and success in studies.'],
+ ['b','பிள்ளைகள் பற்றிய கவலை, துணையுடன் கருத்து வேறுபாடு.','Worries about children and disagreements with your spouse.'],
+ ['g','போட்டியாளர்களை வெல்லுதல், அங்கீகாரம், பணியில் முன்னேற்றம்.','Success over competitors, recognition and progress at work.'],
+ ['b','கூட்டாளிகளுடன் சர்ச்சை, தவறான புரிதல்.','Disputes and misunderstandings with partners.'],
+ ['g','லாபம், வெற்றி, நல்ல செய்தி; புத்திசாலித்தனமான தீர்வுகள்.','Gains, success and good news; clever solutions.'],
+ ['b','பணியில் தடைகள், பெரியோருடன் கருத்து வேறுபாடு.','Obstacles at work and disagreements with elders.'],
+ ['g','பணியில் வெற்றி, இலக்குகளை அடைதல், வணிகத்தில் லாபம்.','Success at work, targets met and gains in trade.'],
+ ['g','லாபம், நல்ல செய்தி, நண்பர்களின் உதவி, சுகம்.','Gains, good news, help from friends and comfort.'],
+ ['b','செலவுகள், மறதி, பின்னடைவுகள்; ஆவணங்களை இருமுறை சரிபார்க்கவும்.','Expenses, forgetfulness and setbacks; double-check documents.']]
+};
+
+const PARI={
+ Jupiter:['வியாழக்கிழமை தட்சிணாமூர்த்தி அல்லது குரு பகவானை வழிபட்டு நெய் தீபம் ஏற்றவும்; மஞ்சள் வஸ்திரம், கொண்டைக்கடலை சமர்ப்பிக்கலாம்; ஆசிரியர்கள், பெரியோருக்கு உதவவும். தலங்கள்: ஆலங்குடி, தென்திட்டை.','On Thursdays, worship Dakshinamurthy or Guru Bhagavan and light a ghee lamp; offer yellow cloth or chickpeas (kondakadalai), and help teachers and elders. Temples: Alangudi and Thenthittai.'],
+ Saturn:['சனிக்கிழமை சனி பகவானுக்கு எள் எண்ணெய் தீபம் ஏற்றவும்; ஆஞ்சநேயர் அல்லது பெருமாளை வழிபடவும்; காகத்துக்கு அன்னமிட்டு, முதியோர், மாற்றுத்திறனாளிகள், உழைப்பாளிகளுக்கு உதவவும். தலம்: திருநள்ளாறு.','On Saturdays, light a sesame-oil lamp for Sani Bhagavan and worship Anjaneya or Perumal; feed crows, and help the elderly, the disabled and working people. Temple: Thirunallar.'],
+ Rahu:['ராகு காலத்தில் (குறிப்பாக செவ்வாய், ஞாயிறு) துர்க்கையை வழிபடவும்; திருநாகேஸ்வரம் நாகநாதர் கோயிலில் வழிபாடு. ஆதரவற்றோருக்கு உதவவும், ஏமாற்றுதலைத் தவிர்க்கவும்.','Worship Durga during Rahu kalam, especially on Tuesdays and Sundays; pray at the Naganathar temple, Thirunageswaram. Help the destitute and avoid deceit.'],
+ Ketu:['விநாயகரை வழிபடவும்; கீழப்பெரும்பள்ளம் நாகநாதர் கோயிலில் வழிபாடு. பல வண்ண வஸ்திரம், கொள்ளு தானம் செய்யலாம்; தியானத்தைத் தொடரவும்.','Worship Vinayaka; pray at the Naganathar temple, Keezhaperumpallam. Offer multi-coloured cloth or horse gram (kollu), and keep up meditation.']
+};
+const PNAME={Jupiter:['குரு','Guru (Jupiter)'],Saturn:['சனி','Sani (Saturn)'],Rahu:['ராகு','Rahu'],Ketu:['கேது','Ketu'],Sun:['சூரியன்','Sun'],Mars:['செவ்வாய்','Mars'],Venus:['சுக்கிரன்','Venus'],Mercury:['புதன்','Mercury']};
+const PGEN={Jupiter:'குருவின்',Saturn:'சனியின்'};
+const PASPECT={Jupiter:[5,7,9],Saturn:[3,7,10]};
+const RVAL={g:1,m:0,b:-1};
+const BAND=[null,
+ ['b','சோதனை','Testing','சோதனையான காலம்: பொறுமை, ஒழுக்கம், வழிபாடு, சேமிப்பு ஆகியவை உங்களைக் காக்கும்; புதிய அபாயங்கள் வேண்டாம்.','A testing period: patience, discipline, prayer and savings carry you through; avoid new risks.'],
+ ['b','கவனம்','Careful','கவனம் தேவைப்படும் காலம்: பெரிய முடிவுகளை நன்கு யோசித்து, சாதகமான காலங்களில் மட்டும் எடுக்கவும்.','A period that needs care: take big decisions slowly, and only in the favourable windows.'],
+ ['m','கலவை','Mixed','கலவையான காலம்: நல்ல காலங்களும் சோதனைக் காலங்களும் மாறி மாறி வரும்; கீழே உள்ள காலப் பிரிவுகளைப் பார்த்துத் திட்டமிடவும்.','A mixed period: good and testing stretches alternate, so plan by the periods below.'],
+ ['g','நன்று','Good','நல்ல காலம்: சில விஷயங்களில் கவனம் தேவைப்பட்டாலும் பொதுவாக முன்னேற்றம் உண்டு.','A good period: progress overall, with a few areas that need care.'],
+ ['g','மிக நன்று','Excellent','மிகவும் சாதகமான காலம்: முக்கியக் கிரகங்கள் பெரும்பாலும் நல்ல இடங்களில். முயற்சிகளைத் தொடங்கவும் விரிவாக்கவும் ஏற்றது.','A strongly supportive period: the major planets sit mostly in good positions. A time to start and expand.']];
+const bandOf=s=>s>=0.45?5:s>=0.15?4:s>-0.15?3:s>-0.45?2:1;
+
+/* ---------- engine ---------- */
+const PALC={};
+const signAt=(body,t)=>Math.floor(Jyo.sidLon(body,t instanceof Date?t:new Date(t))/30);
+const houseOf=(sign,r)=>((sign-r+12)%12)+1;
+function plCross(body,t0,t1,stepH){
+  const sg=t=>Math.floor(Jyo.sidLon(body,new Date(t))/30), st=stepH*3600000, out=[];
+  let a=t0, sa=sg(a);
+  while(a<t1){ const b=Math.min(a+st,t1), sb=sg(b);
+    if(sb!==sa){ let lo=a,hi=b; while(hi-lo>30000){ const m=(lo+hi)/2; if(sg(m)===sa) lo=m; else hi=m; } out.push({t:new Date(hi),from:sa,to:sb,fwd:((sb-sa+12)%12)===1}); }
+    a=b; sa=sb; }
+  return out;
+}
+/* sign changes of a slow planet, grouped into peyarchi events (early entry, retrograde return, main entry) */
+function plSlow(body){
+  if(PALC[body]) return PALC[body];
+  const y=new Date().getUTCFullYear(), back=body==='Saturn'?10:5, fwd=body==='Saturn'?10:6;
+  const t0=Date.UTC(y-back,0,1), t1=Date.UTC(y+fwd,0,1), cr=plCross(body,t0,t1,body==='Sun'?12:24);
+  const ev=[]; let cur=null;
+  if(body!=='Sun') for(const c of cr){
+    const normal=body==='Rahu'?!c.fwd:c.fwd;
+    if(normal){ if(cur&&cur.sign===c.to) cur.steps.push({t:c.t,k:'in',from:c.from,to:c.to}); else { cur={body,sign:c.to,from:c.from,steps:[{t:c.t,k:'in',from:c.from,to:c.to}]}; ev.push(cur); } }
+    else if(cur) cur.steps.push({t:c.t,k:'back',from:c.from,to:c.to});
+  }
+  ev.forEach((e,i)=>{ const ins=e.steps.filter(s=>s.k==='in'); e.first=ins[0].t; e.settle=ins[ins.length-1].t; e.idx=i; e.next=ev[i+1]||null; e.prev=ev[i-1]||null; });
+  return PALC[body]={cr,t0,t1,ev};
+}
+function plSegs(body,A,B){
+  const S=plSlow(body==='Ketu'?'Rahu':body), k=body==='Ketu'?6:0; let s=signAt(body==='Ketu'?'Rahu':body,A), t=A; const out=[];
+  for(const c of S.cr){ if(c.t<=A) continue; if(c.t>=B) break; out.push({s:(s+k)%12,t0:t,t1:c.t}); s=c.to; t=c.t; }
+  out.push({s:(s+k)%12,t0:t,t1:B}); return out;
+}
+function defaultEvent(body){
+  const S=plSlow(body), now=new Date(), D=86400000;
+  const up=S.ev.find(e=>e.settle>now);
+  if(up&&(up.first<=now||up.settle-now<75*D)) return up.idx;
+  let last=0; S.ev.forEach(e=>{ if(e.settle<=now) last=e.idx; }); return last;
+}
+
+/* ---------- formatting ---------- */
+function plTz(d){ const p=placeOf(PLACE); if(p.custom||!p.iana) return p.tz; try{ return offsetAt(p.iana,d.getTime())/60; }catch(e){ return p.tz; } }
+function dTa(d,t){ const z=plTz(d), x=inTz(d,z); return x.getUTCDate()+' '+MON_FULL_TA[x.getUTCMonth()]+' '+x.getUTCFullYear()+(t?', '+timeTa(d,z):''); }
+function dEn(d,t){ const z=plTz(d), x=inTz(d,z); return x.getUTCDate()+' '+MON[x.getUTCMonth()]+' '+x.getUTCFullYear()+(t?', '+fmtTime(d,z):''); }
+function dShortTa(d){ const z=plTz(d), x=inTz(d,z); return x.getUTCDate()+' '+MON_FULL_TA[x.getUTCMonth()]; }
+function dShortEn(d){ const z=plTz(d), x=inTz(d,z); return x.getUTCDate()+' '+MON[x.getUTCMonth()]; }
+const rngTa=(a,b)=>dTa(a)+' – '+dTa(b), rngEn=(a,b)=>dEn(a)+' – '+dEn(b);
+const chipOf=k=>{ const L=DLV[k]; return '<span class="chip '+L[2]+'">'+L[0]+' · '+L[1]+'</span>'; };
+const bandChip=b=>'<span class="chip '+BAND[b][0]+'">'+BAND[b][1]+' · '+BAND[b][2]+'</span>';
+const firstSentence=s=>{ const i=s.indexOf('. '); return i>0?s.slice(0,i+1):s; };
+
+/* one planet in one house, full reading */
+function gocharBlock(body,sign,r,extraTa,extraEn){
+  const h=houseOf(sign,r), e=PG[body][h-1], nm=PNAME[body];
+  const head=tx(nm[0]+': உங்கள் ராசிக்கு '+h+'ம் இடம் ('+RASI_TA[sign]+')'+(e[1]?' · '+e[1]:''), nm[1]+': '+ordn(h)+' house from your Moon sign ('+RASI_EN[sign]+')'+(e[2]?' · '+e[2]:''));
+  let asp='';
+  if(PASPECT[body]){
+    const hs=PASPECT[body].map(a=>((h+a-2)%12)+1), onR=hs.includes(1);
+    asp='<p class="rp-asp">'+tx(PGEN[body]+' பார்வை: '+hs.map(x=>x+'ம் இடம் ('+PH_TA[x-1]+')').join('; ')+'.'+(onR?(body==='Jupiter'?' உங்கள் ராசியின் மீதே குருவின் பார்வை விழுவது சிறப்பான பலம்.':' உங்கள் ராசியின் மீது சனியின் பார்வை: மன அழுத்தம், சோர்வில் கவனம்.'):''),
+      (body==='Jupiter'?'Guru':'Sani')+'’s sight falls on your '+hs.map(x=>ordn(x)+' ('+PH_EN[x-1]+')').join('; ')+'.'+(onR?(body==='Jupiter'?' Guru’s sight on your own Moon sign is a real blessing.':' Saturn’s sight on your Moon sign: watch for stress and fatigue.'):''))+'</p>';
+  }
+  return {h,rating:e[0],html:'<div class="rp-blk '+e[0]+'"><div class="rp-h"><span>'+head+'</span>'+chipOf(e[0])+'</div><p>'+tx(e[3],e[4])+'</p>'+asp+(extraTa?'<p class="rp-asp">'+tx(extraTa,extraEn)+'</p>':'')+'</div>'};
+}
+function pariHTML(bodies){
+  if(!bodies.length) return '';
+  return '<div class="rp-pari"><b>'+tx('பரிகாரம் (விருப்பப்படி)','Remedies (optional)')+'</b><ul>'+bodies.map(b=>'<li><b>'+tx(PNAME[b][0],PNAME[b][1])+':</b> '+tx(PARI[b][0],PARI[b][1])+'</li>').join('')+'</ul></div>';
+}
+/* Saturn period that contains time T for rasi r (Ezharai, Ashtama, Ardhashtama, Kandaka) */
+function sanPeriod(r,T){
+  const S=plSlow('Saturn'), h=houseOf(signAt('Saturn',T),r);
+  const kinds={12:['ezh',12,3],1:['ezh',12,3],2:['ezh',12,3],8:['ash',8,9],4:['ard',4,5],7:['kan',7,8]};
+  const k=kinds[h]; if(!k) return null;
+  const sStart=(r+k[1]-1)%12, sEnd=(r+k[2]-1)%12;
+  let st=null; for(const e of S.ev){ if(e.sign===sStart&&e.first<=T) st=e; }
+  let en=null; if(st) for(const e of S.ev){ if(e.idx>st.idx&&e.sign===sEnd){ en=e; break; } }
+  const N={ezh:['ஏழரைச் சனி','Ezharai Sani (Sade Sati)'],ash:['அஷ்டமச் சனி','Ashtama Sani'],ard:['அர்த்தாஷ்டமச் சனி','Ardhashtama Sani'],kan:['கண்டகச் சனி','Kandaka Sani']}[k[0]];
+  const phase=k[0]==='ezh'?({12:1,1:2,2:3})[h]:0;
+  const a=st?st.first:null, b=en?en.settle:null;
+  return {kind:k[0],ta:N[0]+(phase?' (பகுதி '+phase+'/3)':'')+': '+(a?dTa(a):'—')+' முதல் '+(b?dTa(b):'—')+' வரை.', en:N[1]+(phase?' (phase '+phase+' of 3)':'')+': '+(a?dEn(a):'—')+' to '+(b?dEn(b):'—')+'.'};
+}
+
+/* ---------- peyarchi ---------- */
+function evSteps(e){
+  const S=e.body==='Rahu';
+  const lines=e.steps.map((s,i)=>{
+    const last=s.k==='in'&&s.t.getTime()===e.settle.getTime(), early=s.k==='in'&&!last;
+    const kt=s.k==='back'?['வக்ரமாகத் திரும்புதல்','retrograde return']:early?['அதிசாரம், தற்காலிக நுழைவு','early entry, athisaram']:['முழுப் பெயர்ச்சி','main peyarchi'];
+    const k2=S?' · '+tx('கேது '+RASI_TA[(s.from+6)%12]+' → '+RASI_TA[(s.to+6)%12],'Ketu '+RASI_EN[(s.from+6)%12]+' → '+RASI_EN[(s.to+6)%12]):'';
+    return '<li><b>'+tx(dTa(s.t,true),dEn(s.t,true))+':</b> '+tx(RASI_TA[s.from]+' → '+RASI_TA[s.to],RASI_EN[s.from]+' → '+RASI_EN[s.to])+k2+' <span class="muted">('+tx(kt[0],kt[1])+')</span></li>';
+  });
+  return '<ol class="rp-steps">'+lines.join('')+'</ol>';
+}
+function evLabel(e){
+  const n=e.body==='Rahu'?['ராகு–கேது','Rahu–Ketu']:[PNAME[e.body][0],PNAME[e.body][1].split(' ')[0]];
+  return n[0]+' '+RASI_TA[e.from]+' → '+RASI_TA[e.sign]+', '+dShortTa(e.settle)+' '+inTz(e.settle,plTz(e.settle)).getUTCFullYear()+' · '+n[1]+' '+RASI_EN[e.from]+' → '+RASI_EN[e.sign]+', '+dEn(e.settle);
+}
+function peyHead(e){
+  const nm=e.body==='Rahu'?['ராகு–கேது பெயர்ச்சி','Rahu–Ketu Peyarchi']:e.body==='Jupiter'?['குரு பெயர்ச்சி','Guru Peyarchi']:['சனி பெயர்ச்சி','Sani Peyarchi'];
+  const yr=inTz(e.settle,plTz(e.settle)).getUTCFullYear();
+  const pos=e.body==='Rahu'?tx('ராகு '+RASI_TA[e.from]+' → '+RASI_TA[e.sign]+', கேது '+RASI_TA[(e.from+6)%12]+' → '+RASI_TA[(e.sign+6)%12],'Rahu '+RASI_EN[e.from]+' → '+RASI_EN[e.sign]+', Ketu '+RASI_EN[(e.from+6)%12]+' → '+RASI_EN[(e.sign+6)%12])
+    :tx(RASI_TA[e.from]+' → '+RASI_TA[e.sign],RASI_EN[e.from]+' → '+RASI_EN[e.sign]);
+  const nx=e.next?tx('அடுத்த பெயர்ச்சி: '+dTa(e.next.settle)+' ('+RASI_TA[e.next.from]+' → '+RASI_TA[e.next.sign]+'). இந்தப் பலன்கள் அதுவரை பொருந்தும்.','Next peyarchi: '+dEn(e.next.settle)+' ('+RASI_EN[e.next.from]+' → '+RASI_EN[e.next.sign]+'). These readings apply until then.'):'';
+  const multi=e.steps.length>1?'<p class="rp-asp">'+tx('அதிசார, வக்ர காலங்களில் (மேலே) கிரகம் முந்தைய ராசியில் இருக்கும் நாட்களில் முந்தைய நிலையின் பலனே தொடரும்.','On the days the planet is back in its previous sign (see above), the previous position’s results continue.')+'</p>':'';
+  return {title:tx(nm[0]+' '+yr,nm[1]+' '+yr), html:'<div class="rp-ev"><div class="rp-evt">'+tx(nm[0]+' '+yr,nm[1]+' '+yr)+'</div><div>'+pos+'</div>'+evSteps(e)+multi+(nx?'<p class="rp-asp">'+nx+'</p>':'')+'</div>'};
+}
+function peyReading(e,r){
+  let html='', rate=0, pari=[];
+  if(e.body==='Rahu'){
+    const a=gocharBlock('Rahu',e.sign,r), b=gocharBlock('Ketu',(e.sign+6)%12,r);
+    html=a.html+b.html; rate=RVAL[a.rating]+RVAL[b.rating];
+    if(a.rating!=='g') pari.push('Rahu'); if(b.rating!=='g') pari.push('Ketu');
+    rate=rate>=1?'g':rate<=-1?'b':'m';
+  } else {
+    let xt='',xe='';
+    if(e.body==='Saturn'){ const sp=sanPeriod(r,new Date(e.settle.getTime()+864e5)); if(sp){ xt=sp.ta; xe=sp.en; } }
+    const a=gocharBlock(e.body,e.sign,r,xt,xe); html=a.html; rate=a.rating; if(a.rating!=='g') pari.push(e.body);
+  }
+  return {rating:rate, html:html+pariHTML(pari)};
+}
+
+/* ---------- yearly ---------- */
+function sunIngress(fromT,toT){ return plSlow('Sun').cr.filter(c=>c.t>=fromT&&c.t<toT); }
+function tamilYearRange(Y){ const c=plSlow('Sun').cr.filter(c=>c.to===0&&!isNaN(c.t)); const a=c.find(x=>x.t.getUTCFullYear()===Y), b=c.find(x=>x.t.getUTCFullYear()===Y+1); return a&&b?[a.t,b.t]:null; }
+function tamilMonths(A,B){
+  const list=plSlow('Sun').cr.filter(c=>c.t>=new Date(A.getTime()-40*864e5)&&c.t<B);
+  const out=[]; for(let i=0;i<list.length;i++){ const s=list[i], n=list[i+1]; if(!n) break; if(n.t<=A) continue; out.push({ta:TMONTH[s.to],en:TMONTH_EN[s.to],t0:s.t,t1:n.t,sign:s.to,mid:new Date((s.t.getTime()+n.t.getTime())/2)}); }
+  return out;
+}
+const POSC={};
+function posAt(t){ const k=Math.round(t.getTime()/36e5); return POSC[k]||(POSC[k]=Jyo.positions(t)); }
+const MW={Sun:1,Mars:0.8,Venus:0.5,Mercury:0.5,Jupiter:1.2,Saturn:1.2,Rahu:0.5,Ketu:0.5};
+function monthScore(t,r){
+  const P=posAt(t); let s=0,w=0;
+  for(const b in MW){ const h=houseOf(Math.floor(P[b].lon/30),r), k=(PF[b]||PG[b])[h-1][0]; s+=MW[b]*RVAL[k]; w+=MW[b]; }
+  return s/w;
+}
+const mBand=s=>s>0.15?'g':s<-0.15?'b':'m';
+function yearReading(Y,r){
+  const A=Y.A, B=Y.B, span=B-A, W={Jupiter:3,Saturn:3,Rahu:1.5,Ketu:1.5};
+  let sc=0, sw=0, html='', pari=[];
+  for(const body of ['Jupiter','Saturn','Rahu','Ketu']){
+    const segs=plSegs(body,A,B), groups=new Map();
+    for(const g of segs){ const h=houseOf(g.s,r); sc+=W[body]*RVAL[PG[body][h-1][0]]*(g.t1-g.t0)/span; if(!groups.has(h)) groups.set(h,{s:g.s,rs:[]}); groups.get(h).rs.push(g); }
+    sw+=W[body];
+    let worst='g';
+    for(const [h,G] of groups){
+      const rs=G.rs.map(g=>[g.t0,new Date(Math.min(g.t1.getTime(),B.getTime()-1))]);
+      const whenTa=groups.size>1?rs.map(x=>rngTa(x[0],x[1])).join('; '):'', whenEn=groups.size>1?rs.map(x=>rngEn(x[0],x[1])).join('; '):'';
+      const blk=gocharBlock(body,G.s,r);
+      html+=blk.html.replace('<p>',(whenTa?'<p class="rp-when">'+tx(whenTa,whenEn)+'</p>':'')+'<p>');
+      if(RVAL[blk.rating]<RVAL[worst]) worst=blk.rating;
+    }
+    if(worst!=='g') pari.push(body);
+  }
+  const band=bandOf(sc/sw);
+  let sat='';
+  for(const t of [A,new Date((A.getTime()+B.getTime())/2),new Date(B.getTime()-864e5)]){ const sp=sanPeriod(r,t); if(sp){ sat='<p class="rp-sat">'+tx(sp.ta,sp.en)+'</p>'; break; } }
+  // month by month
+  const months=Y.months.map(m=>({m,k:mBand(monthScore(m.mid,r))}));
+  const grid='<div class="rp-mgrid">'+months.map(x=>'<div class="rp-m '+x.k+'"><b>'+tx(x.m.ta,x.m.en)+'</b><span>'+DLV[x.k][0]+' · '+DLV[x.k][1]+'</span></div>').join('')+'</div>';
+  const best=months.filter(x=>x.k==='g').map(x=>x.m), care=months.filter(x=>x.k==='b').map(x=>x.m);
+  const lists='<p class="rp-when">'+tx('சாதகமான மாதங்கள்: '+(best.map(m=>m.ta).join(', ')||'—')+'. கவனம் தேவைப்படும் மாதங்கள்: '+(care.map(m=>m.ta).join(', ')||'—')+'.','Favourable months: '+(best.map(m=>m.en).join(', ')||'—')+'. Months that need care: '+(care.map(m=>m.en).join(', ')||'—')+'.')+'</p>';
+  return {band, html:'<div class="rp-sum"><div class="rp-h"><span>'+tx('ஆண்டின் பொதுப் பலன்','The year overall')+'</span>'+bandChip(band)+'</div><p>'+tx(BAND[band][3],BAND[band][4])+'</p>'+sat+'</div>'+
+    '<h4 class="rp-sub">'+tx('முக்கியக் கிரகங்கள்','The major planets')+'</h4>'+html+
+    '<h4 class="rp-sub">'+tx('மாதவாரியாக','Month by month')+'</h4>'+grid+lists+
+    '<p class="rp-asp">'+tx('மாதக் குறிப்புகள் சூரியன், செவ்வாய், புதன், சுக்கிரன் சஞ்சாரத்தையும் சேர்த்துக் கணக்கிடப்பட்டவை; விவரங்களுக்கு மாத பலனைப் பார்க்கவும்.','The month marks also count the Sun, Mars, Mercury and Venus; see the Monthly view for details.')+'</p>'+pariHTML(pari)};
+}
+function yearOptions(){
+  const now=new Date(), y=now.getUTCFullYear(), out=[];
+  const cur=(tamilYearRange(y)||[now])[0]<=now?y:y-1;
+  for(const Y of [cur,cur+1]){ const R=tamilYearRange(Y); if(!R) continue; const nm=TYEAR[((Y-1987)%60+60)%60];
+    out.push({key:'t'+Y, ta:nm+' ஆண்டு ('+Y+'–'+String((Y+1)%100).padStart(2,'0')+')', en:'Tamil year '+Y+'–'+String((Y+1)%100).padStart(2,'0'),
+      fileEn:'Tamil year '+Y+'-'+String((Y+1)%100).padStart(2,'0'), A:R[0], B:R[1], months:tamilMonths(R[0],R[1])}); }
+  for(const Y of [y,y+1]){ const A=new Date(Date.UTC(Y,0,1)-plTz(new Date(Date.UTC(Y,0,1)))*36e5), B=new Date(Date.UTC(Y+1,0,1)-plTz(new Date(Date.UTC(Y+1,0,1)))*36e5);
+    out.push({key:'e'+Y, ta:Y+' (ஜனவரி–டிசம்பர்)', en:Y+' (January–December)', fileEn:String(Y), A, B,
+      months:[...Array(12)].map((_,i)=>({ta:MON_FULL_TA[i],en:MON_FULL_EN[i],mid:new Date(Date.UTC(Y,i,15))}))}); }
+  return out;
+}
+
+/* ---------- monthly ---------- */
+function monthOptions(){
+  const now=new Date(), list=tamilMonths(new Date(now.getTime()-35*864e5),new Date(now.getTime()+400*864e5));
+  return list.slice(0,14).map(m=>{ const Y=inTz(m.t0,plTz(m.t0)).getUTCFullYear(); return Object.assign(m,{key:m.t0.getTime(),label:m.ta+' '+Y+' · '+m.en+' '+Y+' ('+dShortEn(tmDay1(m.t0))+' – '+dShortEn(new Date(tmDay1(m.t1).getTime()-864e5))+')', isNow:m.t0<=now&&now<m.t1}); });
+}
+function tmDay1(t){ // civil date of Tamil month day 1: the sankranti day if before sunset, else the next day
+  const p=placeOf(PLACE), z=plTz(t), [y,m,d]=Jyo.localYMD(t,z); let off=0;
+  try{ const st=Jyo.sunTimes(y,m,d,p.lat,p.lon,z); if(st.set&&t>st.set) off=1; }catch(e){}
+  return new Date(Date.UTC(y,m-1,d+off,12)-z*36e5);
+}
+function moonSegs(A,B){
+  const cr=plCross('Moon',A.getTime()-3*864e5,B.getTime(),6), out=[]; let s=signAt('Moon',new Date(A.getTime()-3*864e5)), t=new Date(A.getTime()-3*864e5);
+  for(const c of cr){ out.push({s,t0:t,t1:c.t}); s=c.to; t=c.t; } out.push({s,t0:t,t1:B}); return out;
+}
+const MOONC={};
+function monthReading(M,r){
+  const A=M.t0, B=M.t1;
+  const moon=MOONC[M.key]||(MOONC[M.key]=moonSegs(A,B));
+  let html='';
+  // Sun
+  const sh=houseOf(M.sign,r), se=PF.Sun[sh-1];
+  html+='<div class="rp-blk '+se[0]+'"><div class="rp-h"><span>'+tx('சூரியன்: '+sh+'ம் இடம் ('+RASI_TA[M.sign]+')','Sun: '+ordn(sh)+' house ('+RASI_EN[M.sign]+')')+'</span>'+chipOf(se[0])+'</div><p>'+tx(se[1],se[2])+'</p></div>';
+  let s=RVAL[se[0]]*MW.Sun, w=MW.Sun;
+  for(const body of ['Mars','Mercury','Venus']){
+    const segs=plSegs(body,A,B);
+    for(const g of segs){ const h=houseOf(g.s,r), e=PF[body][h-1], frac=(g.t1-g.t0)/(B-A); s+=MW[body]*RVAL[e[0]]*frac;
+      const when=segs.length>1?'<p class="rp-when">'+tx(dShortTa(g.t0)+' – '+dShortTa(g.t1),dShortEn(g.t0)+' – '+dShortEn(g.t1))+'</p>':'';
+      html+='<div class="rp-blk '+e[0]+'"><div class="rp-h"><span>'+tx(PNAME[body][0]+': '+h+'ம் இடம் ('+RASI_TA[g.s]+')',PNAME[body][1]+': '+ordn(h)+' house ('+RASI_EN[g.s]+')')+'</span>'+chipOf(e[0])+'</div>'+when+'<p>'+tx(e[1],e[2])+'</p></div>'; }
+    w+=MW[body];
+  }
+  // slow planets in the background
+  let bg='';
+  for(const body of ['Jupiter','Saturn','Rahu','Ketu']){
+    const segs=plSegs(body,A,B);
+    for(const g of segs){ const h=houseOf(g.s,r), e=PG[body][h-1], frac=(g.t1-g.t0)/(B-A); s+=MW[body]*RVAL[e[0]]*frac;
+      bg+='<li><b>'+tx(PNAME[body][0]+' '+h+'ம் இடம்'+(e[1]?' ('+e[1]+')':''),PNAME[body][1].split(' ')[0]+' in the '+ordn(h)+(e[2]?' ('+e[2]+')':''))+'</b>'+(segs.length>1?' <span class="muted">'+tx(dShortTa(g.t0)+' – '+dShortTa(g.t1),dShortEn(g.t0)+' – '+dShortEn(g.t1))+'</span>':'')+' '+chipOf(e[0])+' '+tx(firstSentence(e[3]),firstSentence(e[4]))+'</li>'; }
+    w+=MW[body];
+  }
+  const k=mBand(s/w), band=k==='g'?4:k==='b'?2:3;
+  // chandrashtama and good days
+  const cs=(r+7)%12;
+  const ch=moon.filter(g=>g.s===cs&&g.t1>A&&g.t0<B).map(g=>tx(dTa(g.t0,true)+' முதல் '+dTa(g.t1,true)+' வரை',dEn(g.t0,true)+' to '+dEn(g.t1,true)));
+  const p=placeOf(PLACE), good=[], d1=tmDay1(A), dN=tmDay1(B);
+  const chs=moon.filter(g=>g.s===cs);
+  for(let t=d1.getTime(); t<dN.getTime(); t+=864e5){ const ms=signAt('Moon',new Date(t)), h=houseOf(ms,r); if([3,6,7,10,11].includes(h)&&!chs.some(g=>g.t0<t+12*36e5&&g.t1>t-6*36e5)) good.push(new Date(t)); }
+  const goodTa=good.map(d=>dShortTa(d)).join(', '), goodEn=good.map(d=>dShortEn(d)).join(', ');
+  return {band, html:
+    '<div class="rp-sum"><div class="rp-h"><span>'+tx(M.ta+' மாதப் பொதுப் பலன்','The month of '+M.en+' overall')+'</span>'+bandChip(band)+'</div><p>'+tx(BAND[band][3],BAND[band][4])+'</p>'+
+    '<p class="rp-when">'+tx(M.ta+' 1 = '+dTa(d1)+'; மாதம் '+dTa(new Date(dN.getTime()-864e5))+' வரை.',M.en+' 1 = '+dEn(d1)+'; the month runs to '+dEn(new Date(dN.getTime()-864e5))+'.')+'</p></div>'+
+    '<h4 class="rp-sub">'+tx('இந்த மாதக் கிரக சஞ்சாரம்','This month’s transits')+'</h4>'+html+
+    '<h4 class="rp-sub">'+tx('நீண்ட காலக் கிரகங்கள்','The slow planets in the background')+'</h4><ul class="rp-bg">'+bg+'</ul>'+
+    '<h4 class="rp-sub">'+tx('சந்திராஷ்டமம்','Chandrashtama')+'</h4><p>'+(ch.length?ch.join('<br>'):tx('இந்த மாதத்தில் இல்லை.','None this month.'))+'</p>'+
+    '<p class="rp-asp">'+tx('சந்திராஷ்டம நேரங்களில் புதிய முயற்சிகள், முக்கிய கையெழுத்துகள், வாக்குவாதங்களைத் தவிர்ப்பது மரபு.','Tradition avoids new ventures, important signatures and arguments during chandrashtama.')+'</p>'+
+    '<h4 class="rp-sub">'+tx('சாதகமான நாட்கள்','Favourable days')+'</h4><p>'+tx(goodTa||'—',goodEn||'—')+'</p>'+
+    '<p class="rp-asp">'+tx('நண்பகலில் சந்திரன் உங்கள் ராசிக்கு 3, 6, 7, 10, 11ம் இடங்களில் இருக்கும் நாட்கள், சந்திராஷ்டம நாட்கள் நீங்கலாக.','Days when the Moon is in the 3rd, 6th, 7th, 10th or 11th from your Moon sign at noon, leaving out chandrashtama days.')+'</p>'};
+}
+
+/* ---------- the tab ---------- */
+let RP={rasi:null, mode:'pey', body:'Jupiter', ev:{}, year:null, month:null};
+(function(){ const s=store.get('sc_myrasi',null); if(Number.isInteger(s)&&s>=0&&s<12) RP.rasi=s; const m=store.get('sc_rpmode','pey'); if(['pey','year','month'].includes(m)) RP.mode=m; })();
+function rpRasiFromHoro(){ try{ const hs=horoStar(); if(hs) return Por.rasiOf(hs.nak,hs.pada); }catch(e){} return null; }
+let RP_INIT=false;
+function rpInit(){
+  if(RP_INIT) return; RP_INIT=true;
+  const sel=$('rpRasi');
+  sel.innerHTML='<option value="">ராசியைத் தேர்ந்தெடுக்கவும் · Choose your rasi</option>'+RASI_TA.map((t,i)=>'<option value="'+i+'">'+t+' · '+RASI_EN[i]+'</option>').join('');
+  relabelOptions(sel);
+  sel.addEventListener('change',()=>{ const v=sel.value===''?null:+sel.value; RP.rasi=v; store.set('sc_myrasi',v); renderPalan(); });
+  $('rpHoro').addEventListener('click',()=>{ const r=rpRasiFromHoro(); if(r===null){ $('rpStars').innerHTML=tx('முதலில் முகப்புப் பக்கத்தில் உங்கள் ஜாதகத்தைக் கணிக்கவும்; பிறகு இங்கே திரும்பி வந்து இதைத் தொடவும்.','First calculate your horoscope on the Home tab, then come back and tap this.'); return; } RP.rasi=r; store.set('sc_myrasi',r); renderPalan(); });
+  document.querySelectorAll('input[name="rpMode"]').forEach(x=>x.addEventListener('change',()=>{ RP.mode=x.value; store.set('sc_rpmode',x.value); renderPalan(); }));
+  document.querySelectorAll('input[name="rpPl"]').forEach(x=>x.addEventListener('change',()=>{ RP.body=x.value; renderPalan(); }));
+  $('rpEv').addEventListener('change',()=>{ RP.ev[RP.body]=+$('rpEv').value; renderPalan(); });
+  $('rpYear').addEventListener('change',()=>{ RP.year=$('rpYear').value; renderPalan(); });
+  $('rpMonth').addEventListener('change',()=>{ RP.month=+$('rpMonth').value; renderPalan(); });
+  if(RP.rasi===null){ const r=rpRasiFromHoro(); if(r!==null) RP.rasi=r; }
+}
+function rasiSummary(r,mine,chipHTML){
+  return '<span class="dp-r"><span class="lt">'+RASI_TA[r]+'</span><span class="xe">'+RASI_EN[r]+'</span><small>'+tri(mine?'உங்கள் ராசி':starsOfRasi(r),mine?'your rasi':starsOfRasi(r,true),RASI_EN[r]+(mine?' · your rasi':''))+'</small></span>'+chipHTML;
+}
+function renderPalan(){
+  rpInit();
+  const r=RP.rasi;
+  $('rpRasi').value=r===null?'':String(r);
+  $('rpStars').innerHTML=r===null?tx('உங்கள் ராசி தெரியவில்லை என்றால், முகப்பில் ஜாதகம் கணித்து “என் ஜாதகத்திலிருந்து எடு” என்பதைத் தொடவும்.','If you don’t know your rasi, calculate your horoscope on Home and tap “Use my horoscope”.')
+    :tx('நட்சத்திரங்கள்: '+starsOfRasi(r),'Stars: '+starsOfRasi(r,true));
+  document.querySelectorAll('input[name="rpMode"]').forEach(x=>x.checked=x.value===RP.mode);
+  document.querySelectorAll('input[name="rpPl"]').forEach(x=>x.checked=x.value===RP.body);
+  $('rpPeyBox').hidden=RP.mode!=='pey'; $('rpYearBox').hidden=RP.mode!=='year'; $('rpMonthBox').hidden=RP.mode!=='month';
+  const out=$('rpOut');
+  let head='', read=null, title='', fname='';
+  if(RP.mode==='pey'){
+    const S=plSlow(RP.body), d=defaultEvent(RP.body);
+    if(RP.ev[RP.body]===undefined) RP.ev[RP.body]=d;
+    const lo=Math.max(0,d-2), hi=Math.min(S.ev.length-1,d+2);
+    $('rpEv').innerHTML=S.ev.slice(lo,hi+1).map(e=>'<option value="'+e.idx+'">'+evLabel(e)+(e.idx===d?' ★':'')+'</option>').join(''); relabelOptions($('rpEv'));
+    $('rpEv').value=String(RP.ev[RP.body]);
+    const e=S.ev[RP.ev[RP.body]], H=peyHead(e); head=H.html; read=x=>peyReading(e,x);
+    const yr=inTz(e.settle,plTz(e.settle)).getUTCFullYear();
+    title=e.body==='Rahu'?bi('ராகு–கேது பெயர்ச்சி பலன் '+yr,'Rahu–Ketu Peyarchi Palan '+yr):e.body==='Jupiter'?bi('குரு பெயர்ச்சி பலன் '+yr,'Guru Peyarchi Palan '+yr):bi('சனி பெயர்ச்சி பலன் '+yr,'Sani Peyarchi Palan '+yr);
+    fname=(e.body==='Rahu'?'Rahu-Ketu':e.body==='Jupiter'?'Guru':'Sani')+' Peyarchi '+yr;
+  } else if(RP.mode==='year'){
+    const opts=yearOptions(); if(!RP.year||!opts.find(o=>o.key===RP.year)) RP.year=opts[0].key;
+    $('rpYear').innerHTML=opts.map(o=>'<option value="'+o.key+'">'+o.ta+' · '+o.en+'</option>').join(''); relabelOptions($('rpYear')); $('rpYear').value=RP.year;
+    const Y=opts.find(o=>o.key===RP.year); read=x=>yearReading(Y,x);
+    head='<div class="rp-ev"><div class="rp-evt">'+tx(Y.ta+' ராசி பலன்',Y.en+' rasi palan')+'</div><div>'+tx(dTa(Y.A)+' முதல் '+dTa(new Date(Y.B.getTime()-1))+' வரை',dEn(Y.A)+' to '+dEn(new Date(Y.B.getTime()-1)))+'</div></div>';
+    title=bi(Y.ta+' ராசி பலன்',Y.en+' Rasi Palan'); fname='Rasi Palan '+Y.fileEn;
+  } else {
+    const opts=monthOptions(); if(!RP.month||!opts.find(o=>o.key===RP.month)) RP.month=(opts.find(o=>o.isNow)||opts[0]).key;
+    $('rpMonth').innerHTML=opts.map(o=>'<option value="'+o.key+'">'+o.label+(o.isNow?' ★':'')+'</option>').join(''); relabelOptions($('rpMonth')); $('rpMonth').value=String(RP.month);
+    const M=opts.find(o=>o.key===RP.month), Y=inTz(M.t0,plTz(M.t0)).getUTCFullYear(); read=x=>monthReading(M,x);
+    head='<div class="rp-ev"><div class="rp-evt">'+tx(M.ta+' '+Y+' மாத ராசி பலன்',M.en+' '+Y+' monthly rasi palan')+'</div><div>'+tx('சூரியன் '+RASI_TA[M.sign]+' ராசியில்: '+dTa(M.t0,true)+' முதல் '+dTa(M.t1,true)+' வரை','Sun in '+RASI_EN[M.sign]+': '+dEn(M.t0,true)+' to '+dEn(M.t1,true))+'</div></div>';
+    title=bi(M.ta+' '+Y+' மாத ராசி பலன்',M.en+' '+Y+' Monthly Rasi Palan'); fname='Rasi Palan '+M.en+' '+Y;
+  }
+  const chipFor=x=>x.band!==undefined?bandChip(x.band):chipOf(x.rating);
+  let main='';
+  if(r!==null){
+    const R=read(r);
+    main='<div class="pdfrow"><button class="btn small pdfbtn" type="button" id="rpPdf">📄 '+bi('PDF பதிவிறக்கு','Download PDF')+'</button></div>'+
+      '<div id="rpMine">'+head+'<div class="rp-main"><div class="rp-mh">'+rasiSummary(r,true,chipFor(R))+'</div>'+R.html+'</div></div>';
+  } else main=head;
+  const others=[...Array(12).keys()].filter(x=>x!==r).map(x=>{ const R=read(x); return '<details class="dp '+(R.band!==undefined?BAND[R.band][0]:R.rating)+'"><summary>'+rasiSummary(x,false,chipFor(R))+'</summary><div class="dp-t">'+R.html+'</div></details>'; }).join('');
+  out.innerHTML=main+'<h3 class="rp-oth">'+tx(r===null?'எல்லா ராசிகளும்':'பிற ராசிகள்',r===null?'All rasis':'Other rasis')+'</h3>'+others+
+    '<p class="note">'+tx('உங்கள் ராசியிலிருந்து (சந்திர ராசி) கிரகங்கள் இருக்கும் இடத்தைக் கொண்டு பாரம்பரிய கோசார விதிகளின்படி. பெயர்ச்சி நாட்கள் திருக்கணித (லஹிரி) முறையில், '+plTa(PLACE)+' நேரப்படி. பல கோயில்களும் பஞ்சாங்கங்களும் பின்பற்றும் வாக்கிய முறையில் பெயர்ச்சி நாள் சில நாட்கள் முதல் சில வாரங்கள் வரை மாறுபடலாம். இவை எல்லோருக்குமான பொதுப் பலன்கள்; உங்கள் சொந்தப் பலன் உங்கள் ஜாதகம், தசை, புத்தியைப் பொறுத்தது.',
+      'Counted from your Moon sign by the classical gochara rules. Transit dates are by the Thirukanitha (Lahiri) method, in '+plEn(PLACE)+' time. The Vakya panchangam that many temples follow can put a peyarchi a few days to a few weeks apart. These are general readings for everyone of a rasi; your own results depend on your horoscope, dasha and bhukti.')+'</p>';
+  const pb=$('rpPdf'); if(pb) pb.addEventListener('click',()=>printReport('rpMine',title,fname+' - '+RASI_EN[r]));
+}
+
 </script>
 <script>
 setupSite();
@@ -2677,7 +3186,7 @@ renderToday();
 renderHistory();
 (function(){
   const start=(document.querySelector('meta[name="sk-start"]')||{}).content||'';
-  const PATHS={home:'/',chakram:'/arudam/',por:'/porutham/'};
+  const PATHS={home:'/',palan:'/rasi-palan/',chakram:'/arudam/',por:'/porutham/'};
   showTab(start==='panchangam'?'home':(start||store.get("sc_tab2","home")),true);
   if(start==='panchangam') setTimeout(()=>$('panchSide').scrollIntoView({block:'start'}),60);
   if(location.protocol==='https:') for(const k in PATHS) $('tb-'+k).addEventListener('click',()=>{ try{ history.replaceState(null,'',PATHS[k]); }catch(e){} });
